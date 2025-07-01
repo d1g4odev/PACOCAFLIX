@@ -2,6 +2,11 @@
 
 Sistema de filmes feito com Angular e Spring Boot para o trabalho da faculdade.
 
+[![GitHub License](https://img.shields.io/github/license/d1g4odev/PACOCAFLIX)](https://github.com/d1g4odev/PACOCAFLIX)
+[![Frontend](https://img.shields.io/badge/Frontend-Angular_13-red)](https://angular.io/)
+[![Backend](https://img.shields.io/badge/Backend-Spring_Boot-green)](https://spring.io/projects/spring-boot)
+[![API](https://img.shields.io/badge/API-TMDB-blue)](https://www.themoviedb.org/)
+
 ## 📝 Sobre o Projeto
 
 O PAÇOCAFLIX é uma aplicação web que permite navegar por filmes, favoritar e avaliar. Os dados dos filmes vêm da API do TMDB.
