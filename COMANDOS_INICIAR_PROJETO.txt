@@ -1,0 +1,275 @@
+🎬 COMANDOS PARA INICIAR O PROJETO CINEAPP - GUIA COMPLETO
+================================================================
+
+📋 PRÉ-REQUISITOS (INSTALAR ANTES DE COMEÇAR)
+================================================================
+
+1. Java JDK 11 ou superior
+   - Download: https://www.oracle.com/java/technologies/downloads/
+   - Ou OpenJDK: https://adoptium.net/
+
+2. Node.js (versão 14 ou superior)
+   - Download: https://nodejs.org/
+
+3. Angular CLI
+   - Instalar globalmente: npm install -g @angular/cli
+
+4. Git (se ainda não tiver)
+   - Download: https://git-scm.com/
+
+================================================================
+🚀 COMANDOS PASSO A PASSO PARA INICIAR O PROJETO
+================================================================
+
+MÉTODO 1: USANDO OS SCRIPTS AUTOMÁTICOS (RECOMENDADO)
+------------------------------------------------------
+
+1. Abra o PowerShell como Administrador
+
+2. Navegue até a pasta do projeto:
+   cd "C:\Users\Rodrigo\OneDrive\Desktop\CINEAPP"
+
+3. Execute o script de inicialização:
+   .\start-system.ps1
+
+4. Aguarde o sistema inicializar (5-10 minutos na primeira vez)
+
+5. Os serviços ficarão disponíveis em:
+   - Frontend: http://localhost:4200
+   - Backend API: http://localhost:8080
+   - Swagger (Documentação API): http://localhost:8080/swagger-ui.html
+   - H2 Database Console: http://localhost:8080/h2-console
+
+================================================================
+
+MÉTODO 2: COMANDOS MANUAIS PASSO A PASSO
+-----------------------------------------
+
+PASSO 1: PREPARAR O AMBIENTE
+----------------------------
+1. Abra o PowerShell
+
+2. Navegue até o diretório do projeto:
+   cd "C:\Users\Rodrigo\OneDrive\Desktop\CINEAPP"
+
+3. Verifique se Java está instalado:
+   java -version
+
+4. Configure JAVA_HOME se necessário:
+   $env:JAVA_HOME = "C:\Program Files\Java\jdk-17"
+
+5. Verifique se Node.js está instalado:
+   node --version
+
+6. Verifique se Angular CLI está instalado:
+   ng version
+
+PASSO 2: CONFIGURAR E INICIAR O BACKEND (Spring Boot)
+-----------------------------------------------------
+1. Entre na pasta do backend:
+   cd movies-api
+
+2. Compile o projeto (primeira vez):
+   .\mvnw clean compile
+
+3. Execute os testes (opcional):
+   .\mvnw test
+
+4. Inicie o backend:
+   .\mvnw spring-boot:run
+
+5. Aguarde a mensagem: "Started MoviesApiApplication"
+
+6. Teste se o backend está funcionando:
+   - Abra navegador em: http://localhost:8080/swagger-ui.html
+
+PASSO 3: CONFIGURAR E INICIAR O FRONTEND (Angular)
+--------------------------------------------------
+IMPORTANTE: Abra um NOVO terminal/PowerShell (deixe o backend rodando)
+
+1. Navegue para a pasta principal:
+   cd "C:\Users\Rodrigo\OneDrive\Desktop\CINEAPP"
+
+2. Entre na pasta do frontend:
+   cd movies-front
+
+3. Instale as dependências (primeira vez ou após atualizações):
+   npm install
+
+4. Inicie o servidor de desenvolvimento:
+   npm start
+   OU
+   ng serve
+
+5. Aguarde a mensagem: "webpack compiled successfully"
+
+6. Acesse o sistema:
+   - Abra navegador em: http://localhost:4200
+
+================================================================
+🗄️ CONFIGURAÇÃO DO BANCO DE DADOS H2
+================================================================
+
+O projeto usa banco H2 em arquivo (não precisa Docker/PostgreSQL)
+
+Para acessar o console H2:
+1. Vá para: http://localhost:8080/h2-console
+2. Configure:
+   - JDBC URL: jdbc:h2:file:./data/movies-api
+   - Username: sa
+   - Password: password
+3. Clique em "Connect"
+
+================================================================
+🔧 COMANDOS ÚTEIS DURANTE O DESENVOLVIMENTO
+================================================================
+
+PARAR O SISTEMA:
+----------------
+- Para parar usando script: .\stop-system.ps1
+- Para parar manualmente: Ctrl + C nos terminais do backend e frontend
+
+REINICIAR APENAS O FRONTEND:
+----------------------------
+1. Pare o frontend (Ctrl + C)
+2. Na pasta movies-front: npm start
+
+REINICIAR APENAS O BACKEND:
+---------------------------
+1. Pare o backend (Ctrl + C)
+2. Na pasta movies-api: .\mvnw spring-boot:run
+
+LIMPAR E RECOMPILAR BACKEND:
+----------------------------
+cd movies-api
+.\mvnw clean install
+
+LIMPAR CACHE DO FRONTEND:
+-------------------------
+cd movies-front
+npm cache clean --force
+rm -rf node_modules
+npm install
+
+================================================================
+🌐 URLS IMPORTANTES DO SISTEMA
+================================================================
+
+Frontend (Interface do usuário):
+- http://localhost:4200
+
+Backend API:
+- http://localhost:8080
+
+Documentação da API (Swagger):
+- http://localhost:8080/swagger-ui.html
+
+Console do Banco H2:
+- http://localhost:8080/h2-console
+
+API Endpoints principais:
+- GET http://localhost:8080/movie/list
+- POST http://localhost:8080/user/login
+- POST http://localhost:8080/user/register
+
+================================================================
+❌ SOLUÇÃO DE PROBLEMAS COMUNS
+================================================================
+
+ERRO: "Port 4200 is already in use"
+-----------------------------------
+1. Pare todos os processos: Ctrl + C
+2. Execute: npx kill-port 4200
+3. Reinicie: npm start
+
+ERRO: "Port 8080 is already in use"
+-----------------------------------
+1. Pare todos os processos: Ctrl + C
+2. Execute: npx kill-port 8080
+3. Reinicie: .\mvnw spring-boot:run
+
+ERRO: "JAVA_HOME not found"
+-----------------------------
+1. Verifique instalações do Java:
+   Get-ChildItem "C:\Program Files\Java" -Directory
+   
+2. Configure JAVA_HOME temporariamente (para sessão atual):
+   $env:JAVA_HOME = "C:\Program Files\Java\jdk-17"
+   
+3. Configure JAVA_HOME permanentemente:
+   [Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk-17", "User")
+   
+4. Reinicie o PowerShell e teste:
+   echo $env:JAVA_HOME
+
+ERRO: "mvnw is not recognized"
+------------------------------
+1. Use: java -jar target/*.jar
+2. Ou instale Maven globalmente
+
+ERRO: "ng is not recognized"
+----------------------------
+1. Instale Angular CLI: npm install -g @angular/cli
+2. Reinicie o terminal
+
+ERRO: Dependências do npm
+-------------------------
+1. Delete pasta node_modules
+2. Delete package-lock.json
+3. Execute: npm install
+
+================================================================
+📝 LOGS E VERIFICAÇÕES
+================================================================
+
+Para verificar se está tudo funcionando:
+
+1. Backend rodando:
+   - Veja no terminal: "Started MoviesApiApplication"
+   - Teste: http://localhost:8080/swagger-ui.html
+
+2. Frontend rodando:
+   - Veja no terminal: "webpack compiled successfully"
+   - Teste: http://localhost:4200
+
+3. Banco H2 funcionando:
+   - Console: http://localhost:8080/h2-console
+   - Dados carregados automaticamente via data.sql
+
+================================================================
+📞 COMANDOS DE TESTE
+================================================================
+
+Testar API obrigatória:
+.\test-api-obrigatoria.ps1
+
+Testar avaliações:
+.\test-avaliacoes.ps1
+
+Testar sistema completo:
+.\test-system.ps1
+
+Teste rápido:
+.\quick-test.ps1
+
+================================================================
+🎯 PRIMEIRA EXECUÇÃO - CHECKLIST
+================================================================
+
+□ Java 11+ instalado
+□ Node.js instalado
+□ Angular CLI instalado
+□ Estar na pasta do projeto
+□ Backend compilou sem erros
+□ Frontend instalou dependências
+□ Ambos serviços estão rodando
+□ http://localhost:4200 carrega
+□ http://localhost:8080/swagger-ui.html carrega
+□ Consegue fazer login/cadastro
+
+================================================================
+
+🎉 PROJETO INICIALIZADO COM SUCESSO!
+O sistema estará disponível em http://localhost:4200
+
+Para parar: Ctrl + C nos terminais ou execute .\stop-system.ps1 
