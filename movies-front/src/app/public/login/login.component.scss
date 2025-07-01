@@ -1,0 +1,77 @@
+.grad{
+    color: white;
+    height: 100vh;
+    background-image: linear-gradient(to right,black, black, transparent,transparent );
+    text-align: center;
+}
+
+.img{
+    background-image: url("./../../../assets/images/pluto.jpg");
+    height: 100vh;
+}
+
+.login-div{
+    padding: 40px;
+    width: 30vw;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+.back-white{
+    background-color: white;
+    width: min-content;
+    height: min-content;
+}
+
+.form{
+    width: 30vw;
+    align-items: center;
+}
+
+.margin-20{
+    
+    margin: 20px;
+}
+
+.margin-title{
+    margin-bottom: 50px;
+}
+
+.btn__login{
+    color: white;
+    width: 150px;
+    padding: 10px;
+    background-color: #00afa6 ;
+    margin-top: 40px;
+    border-radius: 4px;
+}
+
+input{
+    width: 300px;
+    text-align: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.text-white {
+    color: white;
+}
+
+.text-primary {
+    color: #00afa6 !important;
+    text-decoration: none;
+    font-weight: bold;
+    
+    &:hover {
+        color: #008a85 !important;
+        text-decoration: underline;
+    }
+}
+

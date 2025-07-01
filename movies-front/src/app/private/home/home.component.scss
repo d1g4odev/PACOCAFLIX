@@ -1,0 +1,166 @@
+@import "~swiper/css";
+@import "~swiper/css/pagination";
+@import "~swiper/css/navigation";
+
+.banner{
+    height: 60vh;
+    background-image: linear-gradient( rgb(51, 51, 51), black);
+    align-items: center;
+    display: flex;
+    align-items: center;
+}
+
+.title-main{
+    color: white;
+    font-size: 1.5cm;
+}
+
+.texts-main{
+    width: 100%;
+    text-align: center;
+}
+
+.title-sec{
+    color: white;
+}
+
+.swiper-div{
+    height: 76vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: black;
+}
+
+.swiper{
+    //background-color: #00cfc5 ;
+    background-color: black;
+    width: 100%;
+    height: 70vh;
+}
+
+.swiper-slide {
+    //text-align: center;
+    font-size: 18px;
+    width: 70%;
+    //background: #00cfc5 ;
+  
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+  
+.img {
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+  
+
+.title-movie{
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.507), rgba(0, 0, 0, 0.253), transparent, transparent);
+}
+
+.swiper_texts{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+}
+
+.title{
+    font-size: 1cm;
+    padding: 00px 40px;
+}
+
+.sub-title{
+    font-size: 0.7cm;
+    padding-left: 40px;
+    padding-bottom: 40px;
+}
+
+.user-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    
+    .user-info {
+        .welcome-text {
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+        }
+    }
+    
+    .header-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .favorites-btn {
+        background: linear-gradient(135deg, #ff416c, #ff4b2b);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        
+        &:hover {
+            background: linear-gradient(135deg, #ff3457, #ff3516);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(255, 65, 108, 0.3);
+        }
+        
+        &:active {
+            transform: translateY(0);
+        }
+    }
+    
+    .logout-btn {
+        background-color: #ff4757;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            background-color: #ff3742;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(255, 71, 87, 0.3);
+        }
+        
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}
+

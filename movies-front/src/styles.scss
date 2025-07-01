@@ -1,0 +1,616 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    outline: #00afa6 solid 1px !important;
+    
+}
+
+input:focus, input:active{
+    outline: #00afa6 solid 1px !important;
+}
+
+$height-accessibility: 69px;
+$height-header: 56px;
+$dell-earthborn: #F7F7F7;
+$dell-caparol: #F4F4F4;
+
+
+body,
+html {
+  margin: 0;
+  font-size: 16px;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+.dds__btn-outline-primary {
+    color: var(--dell-blue);
+    background-color: #fff;
+    border: 0.08rem solid var(--dell-blue);
+    }
+
+    .dds__btn-outline-primary svg {
+    fill: #fff;
+    }
+
+    .dds__btn-outline-primary.dds__accordion-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__btn-outline-primary.dds__accordion-btn:not(:disabled):not(.dds__disabled):hover,
+    .dds__btn-outline-primary.dds__secondary-accordion-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__btn-outline-primary.dds__secondary-accordion-btn:not(:disabled):not(.dds__disabled):hover,
+    .dds__btn.dds__btn-outline-primary:not(:disabled):not(.dds__disabled):active,
+    .dds__btn.dds__btn-outline-primary:not(:disabled):not(.dds__disabled):hover,
+    .dds__spinbox-horizontal .dds__btn-outline-primary.dds__spinbox-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__spinbox-horizontal .dds__btn-outline-primary.dds__spinbox-btn:not(:disabled):not(.dds__disabled):hover,
+    .dds__spinbox-vertical .dds__btn-outline-primary.dds__spinbox-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__spinbox-vertical .dds__btn-outline-primary.dds__spinbox-btn:not(:disabled):not(.dds__disabled):hover {
+    color: #fff;
+    background-color: var(--primary);
+    border-color: #00447c;
+    }
+
+    .dds__btn-outline-primary:hover svg {
+    fill: #fff;
+    }
+
+    .dds__btn-outline-primary:hover {
+    color: #fff;
+    background-color: var(--primary);
+    border-color: #004e8a;
+    }
+
+    .dds__btn-outline-primary.dds__focus,
+    .dds__btn-outline-primary:focus {
+    box-shadow: 0 0 0 0 rgba(0, 107, 189, 0.5);
+    }
+
+    .dds__btn-outline-primary.dds__disabled,
+    .dds__btn-outline-primary:disabled {
+    color: #fff;
+    background-color: var(--primary);
+    border-color: #004e8a;
+    }
+
+    .dds__btn-outline-primary.dds__disabled svg,
+    .dds__btn-outline-primary:disabled svg {
+    fill: #fff;
+    }
+
+    .dds__btn-outline-primary:not(:disabled):not(.dds__disabled).dds__active,
+    .dds__btn-outline-primary:not(:disabled):not(.dds__disabled):active,
+    .dds__show>.dds__btn-outline-primary.dds__dropdown-toggle {
+    color: #fff;
+    background-color: #004e8a;
+    border-color: #00477d;
+    }
+
+    .dds__btn-outline-primary:not(:disabled):not(.dds__disabled).dds__active svg,
+    .dds__btn-outline-primary:not(:disabled):not(.dds__disabled):active svg,
+    .dds__show>.dds__btn-outline-primary.dds__dropdown-toggle svg {
+    fill: #fff;
+    }
+
+    .dds__btn-outline-primary:not(:disabled):not(.dds__disabled).dds__active:focus,
+    .dds__btn-outline-primary:not(:disabled):not(.dds__disabled):active:focus,
+    .dds__show>.dds__btn-outline-primary.dds__dropdown-toggle:focus {
+    box-shadow: 0 0 0 0 rgba(0, 107, 189, 0.5);
+    }
+
+    // Button light, text black
+    .dds__btn-light {
+    color: var(--dell-black);
+    background-color: #fff;
+    border: 0.08rem solid var(--dell-granite);
+    }
+
+    .dds__btn-light svg {
+    fill: #fff;
+    }
+
+    .dds__btn-light:hover {
+    color: var(--dell-black);
+    background-color: #fff;
+    border-color: var(--dell-granite);
+    }
+
+    .dds__btn-light.dds__accordion-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__btn-light.dds__accordion-btn:not(:disabled):not(.dds__disabled):hover,
+    .dds__btn-light.dds__secondary-accordion-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__btn-light.dds__secondary-accordion-btn:not(:disabled):not(.dds__disabled):hover,
+    .dds__btn.dds__btn-light:not(:disabled):not(.dds__disabled):active,
+    .dds__btn.dds__btn-light:not(:disabled):not(.dds__disabled):hover,
+    .dds__spinbox-horizontal .dds__btn-light.dds__spinbox-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__spinbox-horizontal .dds__btn-light.dds__spinbox-btn:not(:disabled):not(.dds__disabled):hover,
+    .dds__spinbox-vertical .dds__btn-light.dds__spinbox-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__spinbox-vertical .dds__btn-light.dds__spinbox-btn:not(:disabled):not(.dds__disabled):hover {
+    background-color: var(--dell-granite);
+    border-color: var(--dell-black);
+    }
+
+    .dds__btn-light:hover svg {
+    fill: #fff;
+    }
+
+    .dds__btn-light.dds__focus,
+    .dds__btn-light:focus {
+    box-shadow: 0 0 0 0 rgba(0, 107, 189, 0.5);
+    }
+
+    .dds__btn-light.dds__disabled,
+    .dds__btn-light:disabled {
+    color: #000;
+    background-color: var(--dell-granite);
+    border-color: #000;
+    }
+
+    .dds__btn-light.dds__disabled svg,
+    .dds__btn-light:disabled svg {
+    fill: #fff;
+    }
+
+    .dds__btn-light:not(:disabled):not(.dds__disabled).dds__active svg,
+    .dds__btn-light:not(:disabled):not(.dds__disabled):active svg,
+    .dds__show>.dds__btn-light.dds__dropdown-toggle svg {
+    fill: #fff;
+    }
+
+    .dds__btn-light:not(:disabled):not(.dds__disabled).dds__active:focus,
+    .dds__btn-light:not(:disabled):not(.dds__disabled):active:focus,
+    .dds__show>.dds__btn-light.dds__dropdown-toggle:focus {
+    box-shadow: 0 0 0 0 rgba(238, 238, 238, 0.5);
+    }
+
+    // Button white, background white, text transparent
+    .dds__btn-white {
+    color: black;
+    mix-blend-mode: screen;
+    background-color: #fff;
+    border: 0.08rem solid #fff;
+    }
+
+    .dds__btn-white svg {
+    fill: #fff;
+    }
+
+    .dds__btn-white:hover {
+    background-color: var(--white);
+    border-color: #fff;
+    }
+
+    .dds__btn-white.dds__accordion-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__btn-white.dds__accordion-btn:not(:disabled):not(.dds__disabled):hover,
+    .dds__btn-white.dds__secondary-accordion-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__btn-white.dds__secondary-accordion-btn:not(:disabled):not(.dds__disabled):hover,
+    .dds__btn.dds__btn-white:not(:disabled):not(.dds__disabled):active,
+    .dds__btn.dds__btn-white:not(:disabled):not(.dds__disabled):hover,
+    .dds__spinbox-horizontal .dds__btn-white.dds__spinbox-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__spinbox-horizontal .dds__btn-white.dds__spinbox-btn:not(:disabled):not(.dds__disabled):hover,
+    .dds__spinbox-vertical .dds__btn-white.dds__spinbox-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__spinbox-vertical .dds__btn-white.dds__spinbox-btn:not(:disabled):not(.dds__disabled):hover {
+    background-color: var(--dell-granite);
+    border-color: #fff;
+    }
+
+    .dds__btn-white:hover svg {
+    fill: #fff;
+    }
+
+    .dds__btn-white.dds__focus,
+    .dds__btn-white:focus {
+    box-shadow: 0 0 0 0 rgba(238, 238, 238, 0.5);
+    }
+
+    .dds__btn-white.dds__disabled,
+    .dds__btn-white:disabled {
+    background-color: #fff;
+    border-color: #fff;
+    }
+
+    .dds__btn-white.dds__disabled svg,
+    .dds__btn-white:disabled svg {
+    fill: #fff;
+    }
+
+    .dds__btn-white:not(:disabled):not(.dds__disabled).dds__active,
+    .dds__btn-white:not(:disabled):not(.dds__disabled):active,
+    .dds__show>.dds__btn-white.dds__dropdown-toggle {
+    background-color: #fff;
+    border-color: #fff;
+    }
+
+    .dds__btn-white:not(:disabled):not(.dds__disabled).dds__active svg,
+    .dds__btn-white:not(:disabled):not(.dds__disabled):active svg,
+    .dds__show>.dds__btn-white.dds__dropdown-toggle svg {
+    fill: #fff;
+    }
+
+    .dds__btn-white:not(:disabled):not(.dds__disabled).dds__active:focus,
+    .dds__btn-white:not(:disabled):not(.dds__disabled):active:focus,
+    .dds__show>.dds__btn-white.dds__dropdown-toggle:focus {
+    box-shadow: 0 0 0 0 rgba(238, 238, 238, 0.5);
+    }
+
+    // Button outline white, background transparent
+    .dds__btn-outline-white {
+    color: #fff;
+    background-color: transparent;
+    border: 0.08rem solid #fff;
+    }
+
+    .dds__btn-outline-white svg {
+    fill: #fff;
+    }
+
+    .dds__btn-outline-white:hover {
+    color: #fff;
+    background-color: var(--white);
+    border-color: #fff;
+    }
+
+    .dds__btn-outline-white.dds__accordion-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__btn-outline-white.dds__accordion-btn:not(:disabled):not(.dds__disabled):hover,
+    .dds__btn-outline-white.dds__secondary-accordion-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__btn-outline-white.dds__secondary-accordion-btn:not(:disabled):not(.dds__disabled):hover,
+    .dds__btn.dds__btn-outline-white:not(:disabled):not(.dds__disabled):active,
+    .dds__btn.dds__btn-outline-white:not(:disabled):not(.dds__disabled):hover,
+    .dds__spinbox-horizontal .dds__btn-outline-white.dds__spinbox-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__spinbox-horizontal .dds__btn-outline-white.dds__spinbox-btn:not(:disabled):not(.dds__disabled):hover,
+    .dds__spinbox-vertical .dds__btn-outline-white.dds__spinbox-btn:not(:disabled):not(.dds__disabled):active,
+    .dds__spinbox-vertical .dds__btn-outline-white.dds__spinbox-btn:not(:disabled):not(.dds__disabled):hover {
+    background-color: #fff;
+    border-color: #fff;
+    color: black; // Adiciona transparência no texto
+    mix-blend-mode: screen;
+    }
+
+    .dds__btn-outline-white:hover svg {
+    fill: #fff;
+    }
+
+    .dds__btn-outline-white.dds__focus,
+    .dds__btn-outline-white:focus {
+    box-shadow: 0 0 0 0 rgba(238, 238, 238, 0.5);
+    }
+
+    .dds__btn-outline-white.dds__disabled,
+    .dds__btn-outline-white:disabled {
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
+    }
+
+    .dds__btn-outline-white.dds__disabled svg,
+    .dds__btn-outline-white:disabled svg {
+    fill: #fff;
+    }
+
+    .dds__btn-outline-white:not(:disabled):not(.dds__disabled).dds__active,
+    .dds__btn-outline-white:not(:disabled):not(.dds__disabled):active,
+    .dds__show>.dds__btn-outline-white.dds__dropdown-toggle {
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
+    }
+
+    .dds__btn-outline-white:not(:disabled):not(.dds__disabled).dds__active svg,
+    .dds__btn-outline-white:not(:disabled):not(.dds__disabled):active svg,
+    .dds__show>.dds__btn-outline-white.dds__dropdown-toggle svg {
+    fill: #fff;
+    }
+
+    .dds__btn-outline-white:not(:disabled):not(.dds__disabled).dds__active:focus,
+    .dds__btn-outline-white:not(:disabled):not(.dds__disabled):active:focus,
+    .dds__show>.dds__btn-outline-white.dds__dropdown-toggle:focus {
+    box-shadow: 0 0 0 0 rgba(238, 238, 238, 0.5);
+    }
+    // ---- end buttons ----
+
+    /// cony=tainer background
+    .container-earthborn{
+    background-color: $dell-earthborn;
+    h2{
+        color: #000 !important;
+    }
+    }
+    ///container background
+    .container-caparol{
+    background-color: $dell-caparol;
+    }
+
+    app-testimonials {
+    .swiper-button-prev,
+    .swiper-button-next {
+        color: #333;
+    }
+
+    .swiper-slide {
+        height: auto;
+    }
+    }
+
+    app-knowledge-area {
+    .swiper-button-prev,
+    .swiper-button-next {
+        color: var(--dell-blue);
+    }
+
+    .swiper-slide {
+        height: auto;
+    }
+
+    .dds__span-gray {
+        color: #fff;
+        background-color: #555555;
+        border: 0.08rem solid #555555;
+        padding: .375rem .75rem;
+        font-size: .875em;
+        border-radius: 0;
+        display: inline-block;
+    }
+
+    .navigation-disabled {
+        display: none;
+    }
+
+    .swiper-button-prev, .swiper-button-next{
+        width: 0em !important;
+    }
+
+    .swiper-button-next:after, .swiper-container-rtl .swiper-button-prev:after, .swiper-button-prev:after, .swiper-container-rtl .swiper-button-next:after {
+        font-size: 2em !important;
+    }
+    }
+
+    // span tags
+    .dds__span-outline-white {
+    color: #fff;
+    background-color: transparent;
+    border: 0.08rem solid #fff;
+    padding: .375rem .75rem;
+    font-size: .875rem;
+    border-radius: 0;
+    transition: color 0s ease-in-out,
+        background-color 0s ease-in-out,
+        border-color 0s ease-in-out,
+        box-shadow 0s ease-in-out;
+    display: inline-block;
+    }
+
+
+    @media (min-width: 2360px){
+    .dds__container, .dds__filmstrip-carousel {
+        max-width: 2110px !important;
+    }
+    }
+
+    @media (min-width: 1610px){
+    .dds__container, .dds__filmstrip-carousel {
+        max-width: 1437px;
+    }
+    }
+
+    @media (max-width: 800px) {
+    .title {
+        br {
+            display: none;
+        }
+    }
+
+    }
+    .dds__span-gray {
+    color: #fff;
+    background-color: #555555;
+    border: 0.08rem solid #555555;
+    padding: .375rem .75rem;
+    font-size: .875rem;
+    border-radius: 0;
+    display: inline-block;
+    }
+
+    .success-border {
+        border: 2px solid var(--dell-green);
+    }
+
+    .warning-border {
+        border: 2px solid rgb(216, 216, 13);
+    }
+
+    .error-border {
+        border: 2px solid var(--dell-red);
+    }
+
+    .minimize-image {
+    background: var(--dell-quartz);
+    }
+
+    //Accessibility
+    .visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    }
+
+    pagination-controls{
+    display: flex;
+    justify-content: center;
+
+    .ngx-pagination {
+        padding: 0;
+        margin-right: 50px !important;
+    }
+    }
+
+    .cms_buttons{
+    border-radius: 3px;
+    height: 33px;
+    }
+
+    mwlResizable {
+    box-sizing: border-box; // required for the enableGhostResize option to work
+    }
+
+    .resize-handle-top,
+    .resize-handle-bottom {
+    position: absolute;
+    height: 5px;
+    cursor: row-resize;
+    width: 100%;
+    }
+
+    .resize-handle-top {
+    top: 0;
+    }
+
+    .resize-handle-bottom {
+    bottom: 0;
+    }
+
+    .resize-handle-left,
+    .resize-handle-right {
+    position: absolute;
+    height: 100%;
+    cursor: col-resize;
+    width: 5px;
+    }
+
+    .resize-handle-left {
+    left: 0;
+    }
+
+    .resize-handle-right {
+    right: 0;
+    }
+
+    .no-style-button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    }
+
+    .text-align-start {
+    text-align: start;
+    }
+
+    .pointer-events-none {
+    pointer-events: none;
+    }
+
+// specific style to Stuart-ADM
+
+.btn__cancel{
+    color: var(--red);
+    background-color: transparent;
+    border-color: var(--red);
+    
+}
+
+.btn__cancel:hover{
+    color: white;
+    background-color: var(--red);
+}
+
+.btn__save{
+    color: white;
+    background-color: var(--green);
+    border-color: var(--green);
+    
+}
+
+.btn__save:hover{
+    color: var(--green);
+    background-color: transparent;
+}
+
+.alert__notice{
+    //color: red;
+    padding: 5px;
+    font-size: small;
+    text-align: center;
+    border: 1px var(--red) solid;
+}
+
+.x_red{
+    vertical-align: bottom;
+    color: white;
+    border-radius: 50%;
+    background-color: var(--red);
+    font-size: large;
+    margin-right: 7px;
+}
+
+.attention__notice{
+    //color: red;
+    padding: 5px;
+    font-size: small;
+    text-align: center;
+    border: 1px var(--yellow) solid;
+}
+
+.accept__notice{
+    padding: 5px;
+    font-size: small;
+    text-align: center;
+    border: 1px var(--green) solid;
+}
+
+.check_green{
+    vertical-align: bottom;
+    color:  var(--green);
+    border-radius: 50%;
+    font-size: large;
+    margin-right: 7px;
+}
+
+.box__information{
+    border: 1px solid var(--gray);
+    min-width: 100px;
+    width: min-content;
+    padding: 5px;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.box__feedback{
+    display: flex;
+    background-color: #FFFFC9;
+    width: 300px;
+    padding: 10px;
+    text-align: left;
+}
+
+.btn__blue{
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    color: var(--dell-blue);
+    cursor: pointer;
+}
+
+.btn__delete{
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    color: var(--red);
+    cursor: pointer;
+}
+
+.border_dashed{
+    border:  1px dashed;
+}
+
+.icon_middle{
+    vertical-align: middle;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

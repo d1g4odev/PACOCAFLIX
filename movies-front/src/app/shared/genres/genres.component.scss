@@ -1,0 +1,56 @@
+.div_genres{
+    width: 100%;
+    height: 50vh;
+    background-image: linear-gradient( rgb(0, 119, 167), #01a39b);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.title-genres{   
+    color: white;
+    font-size: 1.5cm;
+}
+
+.center{
+    width: 100%;
+    text-align: center;
+}
+
+.btns-div{
+    padding: 7%;
+    text-align: center;
+    width: 100%;
+}
+
+.btn_genres{
+    
+    border: white solid 2px;
+    border-radius: 20px;
+    margin: 4px;
+    background-color: transparent
+}
+
+.title1-genre{
+    border-radius: 30px;
+    color: white;
+    font-size: 1cm;
+    vertical-align: middle;
+}
+
+.black{
+    padding-top: 60px;
+    //padding-bottom: 40px;
+    background-image:  linear-gradient( rgb(51, 51, 51), black);
+}
+
+.mySwiper{
+    height: 50vh;
+    background-color:  transparent;
+}
+
+.img-movie{
+    border-radius: 10px;
+    width: 200px;
+    height: 300px;
+}

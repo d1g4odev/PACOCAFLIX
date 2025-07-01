@@ -1,0 +1,113 @@
+<!-- Botão Home no canto superior esquerdo -->
+<div class="home-button-container">
+    <button class="home-btn" (click)="goToHome()">
+        <span class="home-icon">🏠</span>
+        <span class="home-text">HOME</span>
+    </button>
+</div>
+
+<div class="poster-div">
+    <div class="center">
+        <img [src]="returnSrc(movie?.poster_path)" alt="" class="img-movie">
+    </div>
+</div>
+
+<div class="black">
+    <div class="texts-div">
+        <h1 class="dds__text-white"> {{movie?.title}}</h1>
+        <h3 class="dds__text-white"> {{ movie?.genre?.name }} - {{ movie?.release_date }}</h3>
+        <img [src]="returnSrcBackDrop(movie?.backdrop_path)" alt="" class="backdrop">
+
+        <h3 class="dds__text-white">Descrição</h3>
+        <p class="dds__text-white">{{movie?.overview}}</p>
+
+
+        <!-- Seção de Favoritos -->
+        <div class="favorite-section">
+            <button 
+                class="favorite-btn" 
+                [class.favorited]="isFavorited"
+                (click)="toggleFavorite()"
+                [disabled]="favoriteLoading">
+                <span class="heart">{{ isFavorited ? '❤️' : '🤍' }}</span>
+                {{ isFavorited ? 'Remover dos Favoritos' : 'Adicionar aos Favoritos' }}
+            </button>
+        </div>
+
+        <h1 class="dds__text-white">Avaliações dos Usuários</h1>
+        <div class="evaluations-list">
+            <div *ngFor="let evaluation of evaluations; let i = index" class="evaluation-item">
+                <div class="evaluation-header">
+                    <span class="author-name">
+                        👤 {{ evaluation?.authorName || evaluation?.name || 'Usuário Anônimo' }}
+                    </span>
+                    <div class="rating-section">
+                        <app-star-rating 
+                            [rating]="evaluation?.score || evaluation?.rating || 0" 
+                            [readonly]="true" 
+                            [showValue]="true">
+                        </app-star-rating>
+                    </div>
+                </div>
+                <p class="dds__text-white evaluation-comment">
+                    "{{ evaluation?.comment || 'Sem comentário.' }}"
+                </p>
+                <div class="evaluation-meta">
+                    <small class="dds__text-white" style="opacity: 0.7;">
+                        Avaliação #{{ i + 1 }}
+                    </small>
+                </div>
+            </div>
+            
+            <div *ngIf="evaluations.length === 0" class="no-evaluations">
+                <div class="empty-state">
+                    <div class="empty-icon">💭</div>
+                    <h3 class="dds__text-white">Nenhuma avaliação ainda</h3>
+                    <p class="dds__text-white">Seja o primeiro a avaliar este filme!</p>
+                </div>
+            </div>
+        </div>
+
+        <h1 class="dds__text-white">Avalie esse título</h1>
+        
+        <div class="evaluation-form">
+            <div class="form-group">
+                <label class="dds__text-white">Seu nome:</label>
+                <input 
+                    class="dds__p-2 input-name" 
+                    type="text" 
+                    placeholder="Digite seu nome"
+                    [(ngModel)]="authorName">
+            </div>
+
+            <div class="form-group">
+                <label class="dds__text-white">Sua avaliação:</label>
+                <app-star-rating 
+                    [(rating)]="userRating" 
+                    [readonly]="false" 
+                    [showValue]="true">
+                </app-star-rating>
+            </div>
+
+            <div class="form-group">
+                <label class="dds__text-white">Comentário:</label>
+                <textarea 
+                    class="dds__p-2 input-comment" 
+                    placeholder="Compartilhe sua opinião sobre o filme..."
+                    [(ngModel)]="comment"
+                    rows="4">
+                </textarea>
+            </div>
+
+            <div class="center">
+                <button 
+                    (click)="submitEvaluation()" 
+                    class="dds__btn submit-btn"
+                    [disabled]="!canSubmitEvaluation()">
+                    <b>{{ evaluationLoading ? 'Enviando...' : 'Enviar Avaliação' }}</b>
+                </button>
+            </div>
+        </div>
+        
+    </div>
+</div>

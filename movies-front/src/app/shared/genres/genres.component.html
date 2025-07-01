@@ -1,0 +1,40 @@
+
+<div>
+    <div class="div_genres">
+        <div class="center">
+            <h1 class="title-genres"> Gêneros</h1>
+        </div>
+        
+        <div class="btns-div">
+            <button class="dds__btn btn_genres dds__text-white" *ngFor="let genre of genres" (click)="getMoviesByGenre(genre)">
+                <b>
+                    {{ genre?.name }}
+                </b>
+            </button>
+        </div>
+    </div>
+    
+    <div *ngIf="listMovies.length != 0" class="center black" >
+        
+        <h1 [innerHtml]="genrerNameChoose" class="title1-genre"></h1>
+        
+        <swiper
+            #swiperRef
+            [loop]="true"
+            [slidesPerView]="6"
+            [spaceBetween]="30"
+            [centeredSlides]="true"
+            [pagination]="{ clickable: true }"
+            class="mySwiper"
+        >
+            <ng-template *ngFor="let movie of listMovies" swiperSlide>
+                <div (click)="gotoDetails(movie?.id)">    
+                    <img [src]="returnSrc(movie?.poster_path)" class="img-movie" alt="">
+                </div>
+            </ng-template>
+        </swiper>
+    
+    </div>
+
+</div>
+

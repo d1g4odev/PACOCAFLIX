@@ -1,0 +1,248 @@
+.poster-div{
+    width: 30vw;
+    height: 100vh;
+    position: fixed;
+    background-image:  linear-gradient( rgb(51, 51, 51), black);
+    display: flex;
+    align-items: center;
+}
+
+.center{
+    width: 100%;
+    text-align: center;
+}
+
+.img-movie{
+    border-radius: 10px;
+}
+
+
+.black{
+    width: 70vw;
+    
+    float: right;
+    background-color: black;
+}
+
+.texts-div{
+    max-width: 800px;
+    padding: 100px;
+}
+
+.backdrop{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 700px;
+}
+
+.dds__btn{
+    background-color: #00afa6 ;
+    border-radius: 5px;
+    color: white;
+    margin-top: 30px;
+}
+
+.input-comment{
+    width: 100%;
+    margin-top: 10px;
+    resize: vertical;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.input-name {
+    width: 300px;
+    margin-top: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+// Seção de favoritos
+.favorite-section {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.favorite-btn {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    
+    &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(255, 65, 108, 0.4);
+    }
+    
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    
+    &.favorited {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    }
+    
+    .heart {
+        font-size: 18px;
+    }
+}
+
+// Lista de avaliações
+.evaluations-list {
+    margin: 20px 0;
+}
+
+.evaluation-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 4px solid #00afa6;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateX(5px);
+    }
+}
+
+.evaluation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    
+    .rating-section {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.author-name {
+    color: #00afa6;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.evaluation-comment {
+    margin: 0 0 10px 0;
+    line-height: 1.6;
+    font-style: italic;
+    font-size: 15px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.evaluation-meta {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.no-evaluations {
+    text-align: center;
+    padding: 40px 20px;
+    
+    .empty-state {
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        h3 {
+            margin: 10px 0;
+            font-size: 24px;
+        }
+        
+        p {
+            opacity: 0.8;
+            font-size: 16px;
+        }
+    }
+}
+
+// Formulário de avaliação
+.evaluation-form {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    
+    .form-group {
+        margin-bottom: 20px;
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+    }
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #00afa6, #00c9a7);
+    min-width: 200px;
+    
+    &:disabled {
+        background: #666;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+}
+
+/* Botão Home fixo no canto superior esquerdo */
+.home-button-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.home-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  .home-icon {
+    font-size: 16px;
+  }
+
+  .home-text {
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+}

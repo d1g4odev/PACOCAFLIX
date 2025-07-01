@@ -1,0 +1,73 @@
+.title1-genre{
+    border-radius: 30px;
+    color: white;
+    font-size: 1cm;
+    vertical-align: middle;
+}
+
+.black{
+    padding-top: 60px;
+    //padding-bottom: 40px;
+    background-image:  linear-gradient( rgb(51, 51, 51), black);
+}
+
+.mySwiper{
+    height: 50vh;
+    background-color:  transparent;
+}
+
+.img-movie{
+    border-radius: 10px;
+    width: 200px;
+    height: 300px;
+}
+
+.center{
+    width: 100%;
+    text-align: center;
+}
+
+.movie-card {
+    position: relative;
+    display: inline-block;
+}
+
+.movie-image {
+    cursor: pointer;
+}
+
+.favorite-heart-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    
+    &:hover:not(:disabled) {
+        background: rgba(0, 0, 0, 0.9);
+        transform: scale(1.1);
+    }
+    
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+    
+    &.favorited {
+        background: rgba(255, 0, 0, 0.8);
+        
+        &:hover:not(:disabled) {
+            background: rgba(255, 0, 0, 1);
+        }
+    }
+}

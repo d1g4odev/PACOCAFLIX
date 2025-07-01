@@ -1,0 +1,64 @@
+
+<!-- Header com informações do usuário -->
+<div class="user-header">
+  <div class="user-info">
+    <span class="welcome-text">Bem-vindo, {{ getCurrentUserName() }}!</span>
+  </div>
+  <div class="header-actions">
+    <button class="favorites-btn" (click)="goToFavorites()">
+      ❤️ Meus Favoritos
+    </button>
+    <button class="logout-btn" (click)="logout()">
+      Sair
+    </button>
+  </div>
+</div>
+
+<app-search-bar></app-search-bar>
+
+<div class="banner" >
+    <div class="texts-main">
+        <h1 class="title-main">Avalie seus filmes favoritos</h1>
+        <h2 class="title-sec"> E aqueles que você não gostou tanto assim </h2>
+    </div>
+</div>
+
+<div class="swiper-div">
+  <swiper
+    #swiperRef
+    [slidesPerView]="'auto'"
+    [spaceBetween]="15"
+    [centeredSlides]="true"
+    [autoplay]="{
+      delay: 4000,
+      disableOnInteraction: false
+    }"
+    [scrollbar]="{
+      hide: true
+    }"
+    class="mySwiper"
+  >
+  <ng-template *ngFor="let movie of movies" swiperSlide>
+    <div class="img"  [style.background-image]="returnSrc(movie?.backdrop_path)"  (click)="gotoDetails(movie?.id)">
+
+      <div class="title-movie">
+        <div class="swiper_texts">
+          <span class="dds__text-white sub-title"  tabindex="0">
+            {{ movie?.genre?.name }}
+          </span>
+          <h2 class="dds__text-white title" tabindex="0">
+            {{ movie?.title }}
+          </h2>
+          
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  </swiper>
+</div>
+
+<app-popular-movies></app-popular-movies>
+
+<app-genres></app-genres>
+
+<app-release-movies></app-release-movies>

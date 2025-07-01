@@ -1,0 +1,91 @@
+
+<div class="img">
+    <div class="grad">
+        <div class="login-div">
+            
+            <!-- Formulário de Login -->
+            <form *ngIf="isLoginMode" [formGroup]="loginForm" (ngSubmit)="onLogin()" class="form dds__d-flex dds__flex-column dds__justify-content-center">
+                <div>
+                    <img src="assets/images/logo.png" class="margin-title" alt="">
+                </div>
+
+                <div class="dds__d-flex dds__flex-column dds__w-80 dds__mb-2 dds__position-relative margin-20">
+                    <label for="email" class="mb-1">Email</label>
+                    <input 
+                        class="dds__p-2" 
+                        type="email" 
+                        placeholder="email@domain.com"
+                        formControlName="email"
+                        required>
+                </div>
+            
+                <div class="dds__d-flex dds__flex-column dds__w-80 dds__mb-2 dds__position-relative margin-20">
+                    <label for="password" class="mb-1">Senha</label>
+                    <input 
+                        class="dds__p-2" 
+                        type="password" 
+                        placeholder="password"
+                        formControlName="password"
+                        required>
+                </div>
+
+                <button type="submit" class="dds__btn btn__login" [disabled]="!loginForm.valid">
+                    <b>ENTRAR</b>
+                </button>
+
+                <div class="text-center mt-3">
+                    <p class="text-white">Não tem conta? 
+                        <a href="javascript:void(0)" (click)="toggleMode($event)" class="text-primary">Cadastre-se</a>
+                    </p>
+                </div>
+            </form>
+
+            <!-- Formulário de Cadastro -->
+            <form *ngIf="!isLoginMode" [formGroup]="registerForm" (ngSubmit)="onRegister()" class="form dds__d-flex dds__flex-column dds__justify-content-center">
+                <div>
+                    <img src="assets/images/logo.png" class="margin-title" alt="">
+                </div>
+
+                <div class="dds__d-flex dds__flex-column dds__w-80 dds__mb-2 dds__position-relative margin-20">
+                    <label for="name" class="mb-1">Nome</label>
+                    <input 
+                        class="dds__p-2" 
+                        type="text" 
+                        placeholder="Seu nome completo"
+                        formControlName="name"
+                        required>
+                </div>
+
+                <div class="dds__d-flex dds__flex-column dds__w-80 dds__mb-2 dds__position-relative margin-20">
+                    <label for="email" class="mb-1">Email</label>
+                    <input 
+                        class="dds__p-2" 
+                        type="email" 
+                        placeholder="email@domain.com"
+                        formControlName="email"
+                        required>
+                </div>
+            
+                <div class="dds__d-flex dds__flex-column dds__w-80 dds__mb-2 dds__position-relative margin-20">
+                    <label for="password" class="mb-1">Senha</label>
+                    <input 
+                        class="dds__p-2" 
+                        type="password" 
+                        placeholder="Mínimo 6 caracteres"
+                        formControlName="password"
+                        required>
+                </div>
+
+                <button type="submit" class="dds__btn btn__login" [disabled]="!registerForm.valid">
+                    <b>CADASTRAR</b>
+                </button>
+
+                <div class="text-center mt-3">
+                    <p class="text-white">Já tem conta? 
+                        <a href="javascript:void(0)" (click)="toggleMode($event)" class="text-primary">Faça login</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

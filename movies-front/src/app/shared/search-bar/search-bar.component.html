@@ -1,0 +1,27 @@
+
+<div class="search-bar">
+    <div class="center ">
+        <input class="dds__p-2 input-search" type="text"  placeholder="Pesquisar" [(ngModel)]="name" (keydown.enter)="searchMovie()">
+    </div>
+</div>
+
+<div *ngIf="listMovies.length != 0" class="center black" >
+        
+    <swiper
+        #swiperRef
+        [slidesPerView]="6"
+        [spaceBetween]="30"
+        [centeredSlides]="true"
+        [pagination]="{ clickable: true }"
+        class="mySwiper"
+    >
+        <ng-template *ngFor="let movie of listMovies" swiperSlide>
+            <div (click)="gotoDetails(movie?.id)">    
+                <img [src]="returnSrc(movie?.poster_path)" class="img-movie" alt="">
+            </div>
+        </ng-template>
+    </swiper>
+
+    <hr class="line">
+</div>
+
