@@ -7,8 +7,8 @@ INSERT INTO genres (name) VALUES ('Ficção Científica');
 INSERT INTO genres (name) VALUES ('Romance');
 
 -- Inserindo usuários de teste
-INSERT INTO users (id, name, email, password) VALUES (1, 'teste', 'teste@teste.com', '$2a$10$example.hash');
-INSERT INTO users (id, name, email, password) VALUES (2, 'admin', 'admin@teste.com', '$2a$10$example.hash');
+INSERT INTO users (id, name, email, password) VALUES (1, 'teste', 'teste@teste.com', 'teste');
+INSERT INTO users (id, name, email, password) VALUES (2, 'admin', 'admin@admin.com', 'admin');
 
 -- Inserindo filmes de teste com estrutura correta
 INSERT INTO movie (id, title, description, id_api, release_date, poster_url, genre) VALUES (1, 'Filme Teste 1', 'Descrição do filme 1', 550, '2024-01-01', '/poster1.jpg', 'Ação');

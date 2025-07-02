@@ -155,12 +155,6 @@ PACOCAFLIX/
 
 Este projeto é licenciado sob a MIT License.
 
-## Contato
-
-Para dúvidas ou sugestões, entre em contato:
-- GitHub: [d1g4odev](https://github.com/d1g4odev)
-- Email: seu-email@exemplo.com
-
 ---
 
 PAÇOCAFLIX - Desenvolvido com Angular + Spring Boot 
