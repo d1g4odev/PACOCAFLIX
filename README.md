@@ -128,42 +128,6 @@ export const environment = {
 ### CORS
 O backend está configurado para aceitar requisições do frontend em `http://localhost:4200`.
 
-## Scripts Disponíveis
-
-### Controle do Sistema
-```bash
-# Iniciar sistema completo (backend + frontend)
-./start-system.ps1
-
-# Iniciar apenas frontend
-./start-frontend-only.ps1
-
-# Parar sistema
-./stop-system.ps1
-
-# Testar sistema completo
-./test-system.ps1
-```
-
-## Testes
-
-### Testar APIs
-```bash
-# Listar filmes
-curl -X GET "http://localhost:8080/api/movies"
-
-# Adicionar favorito
-curl -X POST "http://localhost:8080/api/favorites/add" \
-  -H "Content-Type: application/json" \
-  -d '{"userId": 1, "movieId": 550}'
-```
-
-### Scripts de Teste
-- `test-api-obrigatoria.ps1` - Testa endpoints obrigatórios
-- `test-avaliacoes.ps1` - Testa sistema de avaliações
-- `test-favoritos-routing.ps1` - Testa roteamento de favoritos
-- `test-system.ps1` - Teste completo do sistema
-
 ## Estrutura do Projeto
 
 ```
@@ -176,7 +140,6 @@ PACOCAFLIX/
 │   ├── src/app/         # Código fonte Angular
 │   ├── src/assets/      # Recursos estáticos
 │   └── package.json     # Dependências npm
-├── *.ps1               # Scripts PowerShell
 └── README.md           # Este arquivo
 ```
 
