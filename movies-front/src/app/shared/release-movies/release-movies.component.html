@@ -4,11 +4,12 @@
         
     <swiper
         #swiperRef
-        [loop]="true"
-        [slidesPerView]="6"
-        [spaceBetween]="30"
-        [centeredSlides]="true"
-        [pagination]="{ clickable: true }"
+        [loop]="swiperConfig.loop"
+        [slidesPerView]="swiperConfig.slidesPerView"
+        [spaceBetween]="swiperConfig.spaceBetween"
+        [centeredSlides]="swiperConfig.centeredSlides"
+        [pagination]="swiperConfig.pagination"
+        [breakpoints]="swiperConfig.breakpoints"
         class="mySwiper"
     >
         <ng-template *ngFor="let movie of listMovies" swiperSlide>

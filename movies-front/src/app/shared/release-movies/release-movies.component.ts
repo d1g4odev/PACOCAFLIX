@@ -23,6 +23,41 @@ export class ReleaseMoviesComponent implements OnInit {
   public favoriteStates: Map<number, boolean> = new Map();
   public favoriteLoading: boolean = false;
 
+  // Configurações responsivas do Swiper
+  public swiperConfig = {
+    loop: true,
+    slidesPerView: 'auto' as any,
+    spaceBetween: 15,
+    centeredSlides: false,
+    pagination: { clickable: true },
+    breakpoints: {
+      320: {
+        slidesPerView: 2.2,
+        spaceBetween: 10,
+        centeredSlides: false
+      },
+      480: {
+        slidesPerView: 2.8,
+        spaceBetween: 12,
+        centeredSlides: false
+      },
+      768: {
+        slidesPerView: 4,
+        spaceBetween: 15,
+        centeredSlides: false
+      },
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 20,
+        centeredSlides: false
+      },
+      1200: {
+        slidesPerView: 6,
+        spaceBetween: 25,
+        centeredSlides: true
+      }
+    }
+  };
 
   constructor(
     private movieDbService: MovieDbService,
