@@ -15,6 +15,14 @@ $netflix-white: #ffffff;
     display: flex;
     align-items: center;
     box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
+    
+    @media (max-width: 768px) {
+        position: relative;
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+        padding: 20px;
+    }
 }
 
 .center{
@@ -31,37 +39,81 @@ $netflix-white: #ffffff;
     &:hover {
         transform: scale(1.02);
     }
+    
+    @media (max-width: 768px) {
+        max-width: 250px;
+        height: auto;
+    }
+    
+    @media (max-width: 480px) {
+        max-width: 200px;
+    }
 }
-
 
 .black{
     width: 70vw;
-    
     float: right;
     background-color: $netflix-black;
     min-height: 100vh;
     padding-left: 2rem;
+    
+    @media (max-width: 768px) {
+        width: 100%;
+        float: none;
+        padding-left: 0;
+        min-height: auto;
+    }
 }
 
 .texts-div{
     max-width: 800px;
     padding: 100px;
     
+    @media (max-width: 768px) {
+        padding: 20px;
+        max-width: 100%;
+    }
+    
+    @media (max-width: 480px) {
+        padding: 15px;
+    }
+    
     h1 {
         color: $netflix-white;
         margin-bottom: 1rem;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        
+        @media (max-width: 768px) {
+            font-size: 1.8rem;
+        }
+        
+        @media (max-width: 480px) {
+            font-size: 1.5rem;
+        }
     }
     
     h3 {
         color: $netflix-light-gray;
         margin-bottom: 1.5rem;
+        
+        @media (max-width: 768px) {
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 480px) {
+            font-size: 1rem;
+        }
     }
     
     p {
         color: $netflix-white;
         line-height: 1.6;
         margin-bottom: 2rem;
+        
+        @media (max-width: 480px) {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
     }
 }
 
@@ -70,6 +122,17 @@ $netflix-white: #ffffff;
     margin-bottom: 30px;
     width: 700px;
     border-radius: 8px;
+    
+    @media (max-width: 768px) {
+        width: 100%;
+        max-width: 500px;
+        margin: 20px auto;
+    }
+    
+    @media (max-width: 480px) {
+        max-width: 100%;
+        margin: 15px auto;
+    }
 }
 
 .dds__btn{
@@ -82,6 +145,12 @@ $netflix-white: #ffffff;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    
+    @media (max-width: 480px) {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
     
     &:hover {
         background: linear-gradient(135deg, $netflix-dark-red 0%, $netflix-red 100%);
@@ -105,6 +174,11 @@ $netflix-white: #ffffff;
     padding: 12px;
     font-family: inherit;
     
+    @media (max-width: 480px) {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
     &:focus {
         outline: none;
         border-color: $netflix-red;
@@ -125,6 +199,16 @@ $netflix-white: #ffffff;
     color: $netflix-white;
     padding: 12px;
     
+    @media (max-width: 768px) {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    @media (max-width: 480px) {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
     &:focus {
         outline: none;
         border-color: $netflix-red;
@@ -140,6 +224,10 @@ $netflix-white: #ffffff;
 .favorite-section {
     margin: 20px 0;
     text-align: center;
+    
+    @media (max-width: 480px) {
+        margin: 15px 0;
+    }
 }
 
 .favorite-btn {
@@ -155,6 +243,12 @@ $netflix-white: #ffffff;
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    
+    @media (max-width: 480px) {
+        padding: 10px 20px;
+        font-size: 14px;
+        gap: 6px;
+    }
     
     &:hover:not(:disabled) {
         transform: translateY(-2px);
@@ -174,12 +268,20 @@ $netflix-white: #ffffff;
     
     .heart {
         font-size: 18px;
+        
+        @media (max-width: 480px) {
+            font-size: 16px;
+        }
     }
 }
 
 // Lista de avaliações
 .evaluations-list {
     margin: 20px 0;
+    
+    @media (max-width: 480px) {
+        margin: 15px 0;
+    }
 }
 
 .evaluation-item {
@@ -191,11 +293,21 @@ $netflix-white: #ffffff;
     transition: all 0.3s ease;
     border: 1px solid rgba(229, 9, 20, 0.2);
     
+    @media (max-width: 480px) {
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+    
     &:hover {
         background: rgba(255, 255, 255, 0.08);
         transform: translateX(5px);
         border-left-color: $netflix-red;
         box-shadow: 0 4px 15px rgba(229, 9, 20, 0.2);
+        
+        @media (max-width: 480px) {
+            transform: translateX(2px);
+        }
     }
 }
 
@@ -204,6 +316,13 @@ $netflix-white: #ffffff;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
+    
+    @media (max-width: 480px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 10px;
+    }
     
     .rating-section {
         display: flex;
@@ -218,6 +337,10 @@ $netflix-white: #ffffff;
     display: flex;
     align-items: center;
     gap: 5px;
+    
+    @media (max-width: 480px) {
+        font-size: 14px;
+    }
 }
 
 .evaluation-comment {
@@ -229,34 +352,62 @@ $netflix-white: #ffffff;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 8px;
     color: $netflix-white;
+    
+    @media (max-width: 480px) {
+        font-size: 13px;
+        padding: 8px;
+        line-height: 1.5;
+    }
 }
 
 .evaluation-meta {
     margin-top: 10px;
     text-align: right;
     color: $netflix-light-gray;
+    
+    @media (max-width: 480px) {
+        text-align: left;
+        font-size: 0.85rem;
+    }
 }
 
 .no-evaluations {
     text-align: center;
     padding: 40px 20px;
     
+    @media (max-width: 480px) {
+        padding: 30px 15px;
+    }
+    
     .empty-state {
         .empty-icon {
             font-size: 48px;
             margin-bottom: 15px;
+            
+            @media (max-width: 480px) {
+                font-size: 36px;
+                margin-bottom: 12px;
+            }
         }
         
         h3 {
             margin: 10px 0;
             font-size: 24px;
             color: $netflix-white;
+            
+            @media (max-width: 480px) {
+                font-size: 20px;
+            }
         }
         
         p {
             opacity: 0.8;
             font-size: 16px;
             color: $netflix-light-gray;
+            
+            @media (max-width: 480px) {
+                font-size: 14px;
+            }
         }
     }
 }
@@ -269,14 +420,29 @@ $netflix-white: #ffffff;
     margin: 20px 0;
     border: 1px solid rgba(229, 9, 20, 0.2);
     
+    @media (max-width: 480px) {
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 8px;
+    }
+    
     .form-group {
         margin-bottom: 20px;
+        
+        @media (max-width: 480px) {
+            margin-bottom: 15px;
+        }
         
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
             color: $netflix-white;
+            
+            @media (max-width: 480px) {
+                font-size: 0.9rem;
+                margin-bottom: 6px;
+            }
         }
     }
 }
@@ -291,6 +457,19 @@ $netflix-white: #ffffff;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    
+    @media (max-width: 768px) {
+        min-width: 150px;
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    @media (max-width: 480px) {
+        min-width: auto;
+        width: 100%;
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
     
     &:hover:not(:disabled) {
         background: linear-gradient(135deg, $netflix-dark-red 0%, $netflix-red 100%);
@@ -311,6 +490,11 @@ $netflix-white: #ffffff;
   top: 20px;
   left: 20px;
   z-index: 1000;
+  
+  @media (max-width: 480px) {
+    top: 15px;
+    left: 15px;
+  }
 }
 
 .home-btn {
@@ -330,6 +514,13 @@ $netflix-white: #ffffff;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(229, 9, 20, 0.3);
 
+  @media (max-width: 480px) {
+    padding: 8px 12px;
+    font-size: 12px;
+    gap: 4px;
+    border-radius: 20px;
+  }
+
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(229, 9, 20, 0.4);
@@ -342,11 +533,20 @@ $netflix-white: #ffffff;
 
   .home-icon {
     font-size: 16px;
+    
+    @media (max-width: 480px) {
+      font-size: 14px;
+    }
   }
 
   .home-text {
     font-size: 13px;
     letter-spacing: 0.5px;
+    
+    @media (max-width: 480px) {
+      font-size: 11px;
+      display: none; // Esconder texto em mobile muito pequeno
+    }
   }
 }
 
@@ -356,10 +556,18 @@ $netflix-white: #ffffff;
   align-items: center;
   gap: 4px;
   
+  @media (max-width: 480px) {
+    gap: 2px;
+  }
+  
   .star-inline {
     font-size: 18px;
     color: #444;
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    
+    @media (max-width: 480px) {
+      font-size: 16px;
+    }
     
     &.filled {
       color: #FFD700;
@@ -379,6 +587,12 @@ $netflix-white: #ffffff;
     font-weight: bold;
     color: #333;
     text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    
+    @media (max-width: 480px) {
+      margin-left: 6px;
+      padding: 1px 4px;
+      font-size: 10px;
+    }
   }
 }
 
@@ -387,6 +601,10 @@ $netflix-white: #ffffff;
   align-items: center;
   gap: 4px;
   
+  @media (max-width: 480px) {
+    gap: 2px;
+  }
+  
   .star-interactive {
     font-size: 24px;
     color: #444;
@@ -394,12 +612,20 @@ $netflix-white: #ffffff;
     transition: all 0.3s ease;
     text-shadow: 0 1px 2px rgba(0,0,0,0.1);
     
+    @media (max-width: 480px) {
+      font-size: 20px;
+    }
+    
     &:hover {
       color: #FFC107;
       transform: scale(1.2);
       text-shadow: 
         0 0 8px rgba(255, 193, 7, 0.9),
         0 0 15px rgba(255, 193, 7, 0.7);
+        
+      @media (max-width: 480px) {
+        transform: scale(1.1);
+      }
     }
     
     &.filled {
@@ -422,5 +648,11 @@ $netflix-white: #ffffff;
     color: #333;
     text-shadow: 0 1px 2px rgba(255,255,255,0.5);
     box-shadow: 0 2px 6px rgba(255, 215, 0, 0.3);
+    
+    @media (max-width: 480px) {
+      margin-left: 8px;
+      padding: 3px 6px;
+      font-size: 12px;
+    }
   }
 }

@@ -135,11 +135,11 @@ export class HomeComponent implements OnInit {
   }
 
   logout(): void {
+    console.log('🚪 HOME: Iniciando logout');
     this.showUserMenu = false;
+    
+    // Deixar o AuthService gerenciar todo o processo de logout
     this.authService.logout();
-    this.router.navigate(['/login']).then(() => {
-      window.location.reload();
-    });
   }
 
   goToAccount(): void {

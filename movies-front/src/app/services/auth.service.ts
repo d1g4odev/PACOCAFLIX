@@ -28,6 +28,7 @@ export class AuthService {
         this.currentUserSubject.next(userData);
       } else {
         console.log('🔄 AuthService: Nenhum usuário encontrado no localStorage');
+        this.currentUserSubject.next(null);
       }
     } catch (error) {
       console.error('❌ AuthService: Erro ao parsear dados do usuário:', error);
@@ -63,6 +64,7 @@ export class AuthService {
         } catch (error) {
           console.error('❌ AuthService: Erro ao recuperar usuário do localStorage:', error);
           localStorage.removeItem('user');
+          this.currentUserSubject.next(null);
         }
       }
     }
@@ -71,23 +73,43 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     const user = localStorage.getItem('user');
-    return !!user;
+    const isAuthenticated = !!user;
+    
+    // Se não há usuário autenticado, garantir que está na tela de login
+    if (!isAuthenticated && this.router.url !== '/login') {
+      console.log('🚪 AuthService: Usuário não autenticado, redirecionando para login');
+      this.router.navigate(['/login']);
+    }
+    
+    return isAuthenticated;
   }
 
   private clearAuthData(): void {
     localStorage.removeItem('user');
+    localStorage.clear(); // Limpar todo o localStorage para evitar dados residuais
     this.currentUserSubject.next(null);
   }
 
   logout(): void {
     console.log('🚪 AuthService: Fazendo logout');
     this.clearAuthData();
-    localStorage.removeItem('user');
-    this.currentUserSubject.next(null);
+    
+    // Redirecionar imediatamente para login
+    this.router.navigate(['/login']).then(() => {
+      console.log('🚪 AuthService: Redirecionado para login após logout');
+      // Forçar recarga para limpar qualquer estado residual
+      window.location.reload();
+    });
   }
 
   getUserName(): string {
     const user = this.getCurrentUser();
-    return user ? user.name : 'Usuário';
+    if (!user) {
+      // Se não há usuário, redirecionar para login
+      console.log('🚪 AuthService: Nenhum usuário encontrado, redirecionando para login');
+      this.router.navigate(['/login']);
+      return '';
+    }
+    return user.name;
   }
 } 
