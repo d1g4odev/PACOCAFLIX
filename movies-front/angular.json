@@ -109,5 +109,8 @@
       }
     }
   },
-  "defaultProject": "movies-front"
+  "defaultProject": "movies-front",
+  "cli": {
+    "analytics": "91f378dd-60d7-4367-9e0e-8daae1a9c1a1"
+  }
 }
