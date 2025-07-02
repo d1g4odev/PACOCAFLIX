@@ -21,6 +21,7 @@ export class PopularMoviesComponent implements OnInit {
   public moviesPopular: Array<any> = [];
   public favoriteStates: Map<number, boolean> = new Map();
   public favoriteLoading: boolean = false;
+
   public isLoading: boolean = false;
 
   constructor(
@@ -37,8 +38,9 @@ export class PopularMoviesComponent implements OnInit {
         this.moviesPopular = response.results;
         console.log('Filmes populares carregados:', this.moviesPopular);
         
-        // Carregar status de favoritos
+        // Carregar estados de favoritos após carregar os filmes
         this.loadFavoriteStates();
+        
         this.isLoading = false;
       },
       error: (error) => {
@@ -49,72 +51,74 @@ export class PopularMoviesComponent implements OnInit {
     });
   }
 
-  // Carregar status de favoritos para todos os filmes
   loadFavoriteStates(): void {
-    const currentUser = this.authService.getCurrentUser();
-    if (!currentUser) return;
-
+    const userFromStorage = localStorage.getItem('user');
+    if (!userFromStorage) return;
+    
+    const currentUser = JSON.parse(userFromStorage);
+    
+    // Para cada filme, verificar se está nos favoritos
     this.moviesPopular.forEach(movie => {
-      this.http.get(`http://localhost:8080/api/favorites/check/${currentUser.id}/${movie.id}`)
+      this.http.get<any>(`http://localhost:8080/api/favorites/check/${currentUser.id}/${movie.id}`)
         .subscribe({
-          next: (response: any) => {
+          next: (response) => {
             this.favoriteStates.set(movie.id, response.isFavorite);
           },
-          error: (error) => {
-            console.error('Erro ao verificar favorito:', error);
+          error: () => {
+            this.favoriteStates.set(movie.id, false);
           }
         });
     });
   }
 
-  // Verificar se filme é favorito
-  isFavorited(movieId: number): boolean {
+  isFavorite(movieId: number): boolean {
     return this.favoriteStates.get(movieId) || false;
   }
 
-  // Toggle favorito
   toggleFavorite(movie: any): void {
-    const currentUser = this.authService.getCurrentUser();
-    if (!currentUser) {
+    const userFromStorage = localStorage.getItem('user');
+    if (!userFromStorage) {
       alert('Você precisa estar logado para adicionar favoritos!');
       return;
     }
     
+    const currentUser = JSON.parse(userFromStorage);
     this.favoriteLoading = true;
     
     const favoriteData = {
       userId: currentUser.id,
-      movieId: movie.id,
-      movieData: {
-        title: movie.title,
-        description: movie.overview,
-        idAPI: movie.id,
-        releaseDate: movie.release_date,
-        posterUrl: movie.poster_path,
-        genre: movie.genre_ids?.[0]?.toString()
-      }
+      movieId: movie.id
     };
 
-    this.http.post('http://localhost:8080/api/favorites/toggle', favoriteData)
+    const isCurrentlyFavorite = this.isFavorite(movie.id);
+    const endpoint = isCurrentlyFavorite ? 
+      'http://localhost:8080/api/favorites/remove' : 
+      'http://localhost:8080/api/favorites/add';
+
+    this.http.post<any>(endpoint, favoriteData)
       .subscribe({
-        next: (response: any) => {
-          this.favoriteStates.set(movie.id, response.isFavorite);
-          console.log(response.message);
+        next: (response) => {
+          if (response.success) {
+            // Inverter o estado atual
+            this.favoriteStates.set(movie.id, !isCurrentlyFavorite);
+            
+            // Feedback visual
+            const message = !isCurrentlyFavorite ? 
+              `"${movie.title}" adicionado aos favoritos!` : 
+              `"${movie.title}" removido dos favoritos!`;
+            console.log(message);
+          } else {
+            alert(response.message || 'Erro ao alterar favorito');
+          }
+          
+          this.favoriteLoading = false;
         },
         error: (error) => {
           console.error('Erro ao alterar favorito:', error);
-          alert('Erro ao alterar favorito!');
-        },
-        complete: () => {
+          alert('Erro ao alterar favorito: ' + (error.error?.message || 'Verifique se o backend está rodando'));
           this.favoriteLoading = false;
         }
       });
-  }
-
-  // Toggle favorito com prevenção de propagação do evento
-  toggleFavoriteWithEvent(movie: any, event: Event): void {
-    event.stopPropagation(); // Previne que o clique ative o card do filme
-    this.toggleFavorite(movie);
   }
 
   getImageUrl(posterPath: string): string {

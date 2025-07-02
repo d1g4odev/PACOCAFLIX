@@ -1,4 +1,3 @@
-
 <!-- Netflix Style Popular Movies Section -->
 <section class="netflix-row" *ngIf="moviesPopular.length > 0">
   <div class="row-header">
@@ -13,6 +12,17 @@
       class="movie-card"
       (click)="gotoDetails(movie?.id)"
     >
+      <!-- Favorite Button (Heart Icon) -->
+      <button 
+        class="favorite-btn" 
+        [class.favorited]="isFavorite(movie?.id)"
+        (click)="toggleFavorite(movie); $event.stopPropagation()"
+        [disabled]="favoriteLoading"
+        title="{{ isFavorite(movie?.id) ? 'Remover dos favoritos' : 'Adicionar aos favoritos' }}"
+      >
+        <span class="heart-icon">{{ isFavorite(movie?.id) ? '❤️' : '🤍' }}</span>
+      </button>
+      
       <img 
         [src]="returnSrc(movie?.poster_path)" 
         [alt]="movie?.title"
@@ -23,21 +33,14 @@
       <!-- Movie Overlay -->
       <div class="movie-overlay">
         <h6 class="movie-title">{{ movie?.title }}</h6>
-                 <p class="movie-rating text-sm" *ngIf="movie?.vote_average">
-           <span class="rating-star">★</span>
-           {{ movie?.vote_average | number:'1.1-1' }}
-         </p>
-         <div class="movie-actions">
-           <button 
-             class="favorite-btn text-xl"
-             [class.favorited]="isFavorited(movie?.id)"
-             (click)="toggleFavoriteWithEvent(movie, $event)"
-             [disabled]="favoriteLoading"
-             [title]="isFavorited(movie?.id) ? 'Remover dos favoritos' : 'Adicionar aos favoritos'"
-           >
-             <span class="heart-icon">♥</span>
-           </button>
-         </div>
+        <div class="movie-rating-new" *ngIf="movie?.vote_average">
+          <app-star-rating 
+            [rating]="(movie?.vote_average / 2)" 
+            [readonly]="true" 
+            [showValue]="true">
+          </app-star-rating>
+        </div>
+
       </div>
       
       <!-- Loading State -->

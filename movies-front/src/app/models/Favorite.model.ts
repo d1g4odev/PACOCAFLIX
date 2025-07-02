@@ -11,4 +11,21 @@ export interface Favorite {
 export interface FavoriteRequest {
   userId: number;
   movieId: number;
+}
+
+export interface FavoriteResponse {
+  success: boolean;
+  message: string;
+  favorite?: Favorite;
+}
+
+export interface FavoriteCheckResponse {
+  isFavorite: boolean;
+  userId: number;
+  movieId: number;
+}
+
+export interface FavoriteToggleResponse {
+  isFavorite: boolean;
+  message: string;
 } 

@@ -9,6 +9,7 @@ import { GenresComponent } from 'src/app/shared/genres/genres.component';
 import { SearchBarComponent } from 'src/app/shared/search-bar/search-bar.component';
 import { PopularMoviesComponent } from 'src/app/shared/popular-movies/popular-movies.component';
 import { ReleaseMoviesComponent } from 'src/app/shared/release-movies/release-movies.component';
+import { StarRatingComponent } from 'src/app/shared/star-rating/star-rating.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ReleaseMoviesComponent } from 'src/app/shared/release-movies/release-mo
     GenresComponent, 
     SearchBarComponent,
     PopularMoviesComponent,
-    ReleaseMoviesComponent
+    ReleaseMoviesComponent,
+    StarRatingComponent
   ],
   imports: [
     CommonModule,

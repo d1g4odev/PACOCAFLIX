@@ -349,3 +349,78 @@ $netflix-white: #ffffff;
     letter-spacing: 0.5px;
   }
 }
+
+/* Estrelas Inline para Details Movie */
+.stars-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  
+  .star-inline {
+    font-size: 18px;
+    color: #444;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    
+    &.filled {
+      color: #FFD700;
+      text-shadow: 
+        0 0 5px rgba(255, 215, 0, 0.8),
+        0 0 10px rgba(255, 215, 0, 0.6),
+        0 1px 3px rgba(0,0,0,0.3);
+    }
+  }
+  
+  .rating-value-inline {
+    margin-left: 8px;
+    background: linear-gradient(135deg, #FFD700, #FFC107);
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+  }
+}
+
+.stars-interactive {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  
+  .star-interactive {
+    font-size: 24px;
+    color: #444;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    
+    &:hover {
+      color: #FFC107;
+      transform: scale(1.2);
+      text-shadow: 
+        0 0 8px rgba(255, 193, 7, 0.9),
+        0 0 15px rgba(255, 193, 7, 0.7);
+    }
+    
+    &.filled {
+      color: #FFD700;
+      text-shadow: 
+        0 0 5px rgba(255, 215, 0, 0.8),
+        0 0 10px rgba(255, 215, 0, 0.6),
+        0 1px 3px rgba(0,0,0,0.3);
+      transform: scale(1.05);
+    }
+  }
+  
+  .rating-value-inline {
+    margin-left: 12px;
+    background: linear-gradient(135deg, #FFD700, #FFC107);
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+    box-shadow: 0 2px 6px rgba(255, 215, 0, 0.3);
+  }
+}

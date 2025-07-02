@@ -1,313 +1,236 @@
-# 🎬 PAÇOCAFLIX
+# 🎬 PAÇOCAFLIX - Sistema de Catálogo de Filmes
 
-> **Uma plataforma de filmes moderna inspirada no Netflix, desenvolvida com Angular 13 e Spring Boot**
+[![Angular](https://img.shields.io/badge/Angular-16-red)](https://angular.io/)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1-green)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-17-orange)](https://openjdk.org/)
+[![H2 Database](https://img.shields.io/badge/H2-Database-blue)](https://www.h2database.com/)
 
-[![Angular](https://img.shields.io/badge/Angular-13-red.svg)](https://angular.io/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7-green.svg)](https://spring.io/projects/spring-boot)
-[![TypeScript](https://img.shields.io/badge/TypeScript-4.7-blue.svg)](https://www.typescriptlang.org/)
-[![Java](https://img.shields.io/badge/Java-11-orange.svg)](https://www.oracle.com/java/)
+Um sistema web completo de catálogo de filmes inspirado no Netflix, desenvolvido com Angular no frontend e Spring Boot no backend. Os usuários podem explorar filmes, visualizar detalhes, aplicar filtros, avaliar filmes e gerenciar favoritos.
 
-## 📋 Sumário
+## 🌟 Funcionalidades
 
-- [🚀 Visão Geral](#-visão-geral)
-- [✨ Funcionalidades](#-funcionalidades)
-- [🛠️ Tecnologias](#-tecnologias)
-- [📦 Instalação](#-instalação)
-- [🎯 Como Usar](#-como-usar)
-- [🎨 Design System](#-design-system)
-- [🔐 Autenticação](#-autenticação)
-- [📱 Responsividade](#-responsividade)
-- [🧪 Testes](#-testes)
-- [🤝 Contribuição](#-contribuição)
+### ✅ Frontend (Angular)
+- [x] **Listagem de filmes** em cards com imagem, título e nota média
+- [x] **Página de detalhes** com sinopse, gêneros, ano e avaliações
+- [x] **Busca por título** com campo de pesquisa no topo
+- [x] **Filtro por gênero** (ação, comédia, drama, etc.)
+- [x] **Sistema de favoritos** - marcar/desmarcar filmes favoritos
+- [x] **Página de favoritos** separada com todos os filmes favoritados
+- [x] **Avaliação de filmes** com sistema de 1-5 estrelas
+- [x] **Cadastro de avaliações** com nome do autor e comentário
+- [x] **Interface responsiva** com design moderno inspirado no Netflix
+- [x] **Componentes reutilizáveis** e código modular
 
-## 🚀 Visão Geral
+### ✅ Backend (Spring Boot)
+- [x] **API de filmes** - listagem, detalhes e filtro por gênero
+- [x] **API de avaliações** - consultar e registrar avaliações por filme
+- [x] **API de favoritos** - marcar/desmarcar favoritos por usuário
+- [x] **Banco H2** - banco relacional em memória com dados de teste
+- [x] **Integração TMDb** - busca dados reais de filmes da API do TMDb
+- [x] **CORS configurado** para comunicação frontend-backend
 
-O PAÇOCAFLIX é uma aplicação web full-stack que simula uma plataforma de streaming de filmes. O projeto combina um frontend Angular moderno com um backend Spring Boot robusto, oferecendo uma experiência de usuário similar ao Netflix.
+## 🛠️ Tecnologias Utilizadas
 
-### 🎯 Objetivos do Projeto
+### Frontend
+- **Angular 16** - Framework principal
+- **TypeScript** - Linguagem de programação
+- **SCSS** - Estilização com paleta Netflix
+- **Angular Router** - Navegação entre páginas
+- **HttpClient** - Consumo de APIs
+- **Swiper.js** - Carrossel de filmes
 
-- Criar uma interface moderna e intuitiva para navegação de filmes
-- Implementar sistema de autenticação seguro
-- Integrar com APIs externas (TMDB) para dados de filmes
-- Desenvolver funcionalidades de favoritos e avaliações
-- Aplicar design responsivo mobile-first
+### Backend
+- **Java 17** - Linguagem de programação
+- **Spring Boot 3.1** - Framework backend
+- **Spring Data JPA** - Acesso a dados
+- **H2 Database** - Banco de dados em memória
+- **Maven** - Gerenciamento de dependências
+- **TMDb API** - Fonte de dados de filmes
 
-## ✨ Funcionalidades
-
-### 🔑 Autenticação e Usuários
-- ✅ **Login seguro** com validação de email e senha
-- ✅ **Registro de usuários** com validações avançadas
-- ✅ **Gerenciamento de sessão** com JWT
-- ✅ **Proteção de rotas** com AuthGuard
-
-### 🎬 Gestão de Filmes
-- ✅ **Catálogo completo** integrado com TMDB API
-- ✅ **Busca avançada** por título, gênero e ano
-- ✅ **Detalhes completos** com sinopse, elenco e trailers
-- ✅ **Filmes populares** e em destaque
-- ✅ **Filtros por gênero** dinâmicos
-
-### ❤️ Funcionalidades Sociais
-- ✅ **Sistema de favoritos** personalizado
-- ✅ **Avaliações e comentários** dos usuários
-- ✅ **Rating com estrelas** interativo
-- ✅ **Lista pessoal** de filmes salvos
-
-### 🎨 Interface e UX
-- ✅ **Design Netflix** com paleta oficial
-- ✅ **Animações suaves** e micro-interações
-- ✅ **Navegação intuitiva** com scroll automático
-- ✅ **Loading states** e feedback visual
-- ✅ **Responsividade completa** mobile-first
-
-## 🛠️ Tecnologias
-
-### Frontend (Angular 13)
-```typescript
-├── Angular 13.3.0        // Framework principal
-├── TypeScript 4.7        // Linguagem de programação
-├── RxJS 7.5             // Programação reativa
-├── Angular Material     // Componentes UI
-├── Swiper.js           // Carrosséis interativos
-└── SCSS                // Estilização avançada
-```
-
-### Backend (Spring Boot)
-```java
-├── Spring Boot 2.7      // Framework backend
-├── Spring Security      // Autenticação e autorização
-├── Spring Data JPA      // Persistência de dados
-├── H2 Database         // Banco de dados em memória
-├── Maven 3.8           // Gerenciamento de dependências
-└── Java 11             // Linguagem de programação
-```
-
-### APIs Externas
-- 🎬 **TMDB API** - The Movie Database para dados de filmes
-- 🖼️ **TMDB Images** - Posters e imagens em alta qualidade
-
-## 📦 Instalação
+## 🚀 Como Executar o Projeto
 
 ### Pré-requisitos
+- **Node.js** 18+ e **npm**
+- **Java 17+**
+- **Maven 3.6+**
+- **Git**
+
+### 1. Clonar o Repositório
 ```bash
-Node.js >= 16.0.0
-Java >= 11
-Maven >= 3.6
-Git
+git clone https://github.com/seu-usuario/CINEAPP.git
+cd CINEAPP
 ```
 
-### 1. Clone o Repositório
-```bash
-git clone https://github.com/d1g4odev/PACOCAFLIX.git
-cd PACOCAFLIX
-```
+### 2. Configurar e Executar o Backend
 
-### 2. Configuração do Backend
 ```bash
+# Navegar para a pasta do backend
 cd movies-api
-mvn clean install
+
+# Compilar o projeto
+mvn clean compile
+
+# Executar o backend (porta 8080)
 mvn spring-boot:run
 ```
 
-O backend estará rodando em: `http://localhost:8080`
+O backend estará disponível em: `http://localhost:8080`
 
-### 3. Configuração do Frontend
+**Endpoints principais:**
+- `GET /api/movies` - Lista todos os filmes
+- `GET /api/movies/{id}` - Detalhes de um filme
+- `GET /api/movies/genre/{genreId}` - Filmes por gênero
+- `GET /api/evaluations/movie/{movieId}` - Avaliações de um filme
+- `POST /api/evaluations` - Criar nova avaliação
+- `GET /api/favorites/user/{userId}` - Favoritos do usuário
+- `POST /api/favorites/add` - Adicionar favorito
+- `POST /api/favorites/remove` - Remover favorito
+
+### 3. Configurar e Executar o Frontend
+
 ```bash
+# Abrir novo terminal e navegar para o frontend
 cd movies-front
+
+# Instalar dependências
 npm install
+
+# Executar em modo desenvolvimento (porta 4200)
 npm start
 ```
 
-O frontend estará rodando em: `http://localhost:4200`
+O frontend estará disponível em: `http://localhost:4200`
 
-### 4. Scripts Automatizados
+### 4. Acessar a Aplicação
 
-#### Windows (PowerShell)
-```powershell
-# Iniciar sistema completo
-.\start-system.ps1
+1. Abra o navegador em `http://localhost:4200`
+2. Faça login com as credenciais padrão:
+   - **Usuário:** `admin`
+   - **Senha:** `admin`
+3. Explore os filmes, adicione favoritos e avalie!
 
-# Iniciar apenas frontend
-.\start-frontend-only.ps1
+## 🗃️ Banco de Dados
 
-# Parar sistema
-.\stop-system.ps1
+O projeto utiliza **H2 Database** em memória com dados pré-configurados:
 
-# Testes completos
-.\test-system.ps1
-```
+- **Console H2:** `http://localhost:8080/h2-console`
+- **JDBC URL:** `jdbc:h2:mem:testdb`
+- **Usuário:** `sa`
+- **Senha:** *(vazio)*
 
-## 🎯 Como Usar
+### Dados de Teste Inclusos
+- **Usuários:** 3 usuários de teste (admin, user1, user2)
+- **Filmes:** Vários filmes com dados do TMDb
+- **Gêneros:** Ação, Drama, Comédia, Ficção Científica, etc.
+- **Avaliações:** Avaliações de exemplo
+- **Favoritos:** Alguns favoritos pré-configurados
 
-### 1. **Primeiro Acesso**
-1. Acesse `http://localhost:4200`
-2. Clique em "Cadastre-se aqui"
-3. Preencha: Nome, Email, Senha (6+ chars, letra + número)
-4. Faça login com suas credenciais
+## 📱 Screenshots
 
-### 2. **Navegação Principal**
-- 🏠 **Início**: Página principal com filmes em destaque
-- 🔍 **Busca**: Campo de pesquisa no topo
-- 🎭 **Gêneros**: Filtros por categoria
-- ❤️ **Favoritos**: Seus filmes salvos
+### Página Inicial
+Interface moderna inspirada no Netflix com carrossel de filmes em destaque.
 
-### 3. **Funcionalidades Avançadas**
-- 👤 **Menu do usuário**: Canto superior direito
-- 🔍 **Debug Panel**: Botão flutuante para diagnósticos
-- 📱 **Modo mobile**: Interface otimizada para celular
+### Página de Favoritos
+Visualização dos filmes favoritos com múltiplas opções de remoção.
 
-## 🎨 Design System
+### Detalhes do Filme
+Informações completas incluindo sinopse, avaliações e sistema de favoritos.
 
-### 🎨 Paleta de Cores Netflix
-```scss
-$netflix-red: #e50914;        // Vermelho principal
-$netflix-dark-red: #b20710;   // Vermelho escuro
-$netflix-black: #000000;      // Preto absoluto
-$netflix-dark-gray: #141414;  // Cinza escuro
-$netflix-gray: #333333;       // Cinza médio
-$netflix-light-gray: #757575; // Cinza claro
-$netflix-white: #ffffff;      // Branco
-```
+## 🎨 Design
 
-### 📐 Tipografia Semântica
-```scss
-H1: 2.5rem (40px)  // Títulos principais
-H2: 2rem (32px)    // Seções importantes
-H3: 1.5rem (24px)  // Subtítulos
-H4: 1.25rem (20px) // Títulos de cards
-H5: 1.125rem (18px)// Texto destacado
-H6: 1rem (16px)    // Texto padrão
-```
-
-### 📱 Breakpoints Responsivos
-```scss
-Mobile:  320px - 767px   // Mobile-first
-Tablet:  768px - 1023px  // Tablet
-Desktop: 1024px+         // Desktop e TV
-```
-
-## 🔐 Autenticação
-
-### 🛡️ Sistema de Segurança
-
-#### Frontend (AuthGuard)
-- ✅ Proteção de rotas privadas
-- ✅ Redirecionamento automático
-- ✅ Verificação de tokens
-- ✅ Gerenciamento de estado
-
-#### Backend (Spring Security)
-- ✅ Autenticação JWT
-- ✅ Endpoints protegidos
-- ✅ Validação de dados
-- ✅ CORS configurado
-
-### 🔑 Fluxo de Autenticação
-```mermaid
-graph LR
-    A[Login] --> B[Validação]
-    B --> C{Credenciais OK?}
-    C -->|Sim| D[Gerar Token]
-    C -->|Não| E[Erro 401]
-    D --> F[Armazenar Token]
-    F --> G[Acessar Sistema]
-    E --> A
-```
-
-## 📱 Responsividade
-
-### 🎯 Abordagem Mobile-First
-
-#### 📱 Mobile (320px - 767px)
-- Interface otimizada para toque
-- Menu hambúrguer
-- Cards em coluna única
-- Textos redimensionados
-
-#### 📊 Tablet (768px - 1023px)
-- Layout em 2 colunas
-- Navegação horizontal
-- Cards maiores
-- Interações otimizadas
-
-#### 🖥️ Desktop (1024px+)
-- Layout completo
-- Hover effects
-- Múltiplas colunas
-- Experiência premium
+O projeto utiliza uma **paleta de cores inspirada no Netflix**:
+- **Vermelho Netflix:** `#e50914` (cor principal)
+- **Preto:** `#000000` (fundo)
+- **Cinza Escuro:** `#141414` (cards)
+- **Cinza:** `#333333` (elementos secundários)
+- **Branco:** `#ffffff` (texto)
 
 ## 🧪 Testes
 
-### 🔧 Scripts de Teste
+### Testar APIs (Backend)
+```bash
+# Listar filmes
+curl -X GET "http://localhost:8080/api/movies"
 
-#### Teste Completo do Sistema
-```powershell
-.\test-system.ps1
+# Adicionar favorito
+curl -X POST "http://localhost:8080/api/favorites/add" \
+  -H "Content-Type: application/json" \
+  -d '{"userId": 1, "movieId": 550}'
 ```
 
-#### Teste da API Obrigatória
-```powershell
-.\test-api-obrigatoria.ps1
+### Scripts de Teste Inclusos
+- `test-api-obrigatoria.ps1` - Testa endpoints obrigatórios
+- `test-avaliacoes.ps1` - Testa sistema de avaliações
+- `test-favoritos-routing.ps1` - Testa roteamento de favoritos
+- `test-system.ps1` - Teste completo do sistema
+
+## 📦 Scripts Disponíveis
+
+### Controle do Sistema
+```bash
+# Iniciar todo o sistema (backend + frontend)
+./start-system.ps1
+
+# Iniciar apenas o frontend
+./start-frontend-only.ps1
+
+# Parar o sistema
+./stop-system.ps1
+
+# Testar o sistema completo
+./test-system.ps1
 ```
 
-#### Teste de Avaliações
-```powershell
-.\test-avaliacoes.ps1
+## 🔧 Configuração Adicional
+
+### Chave da API TMDb
+O projeto já inclui uma chave de API do TMDb configurada. Para usar sua própria chave:
+
+1. Obtenha uma chave em: https://www.themoviedb.org/settings/api
+2. Atualize em `movies-front/src/environments/environment.ts`:
+```typescript
+export const environment = {
+  apiKey: '?api_key=SUA_CHAVE_AQUI'
+};
 ```
 
-#### Teste de Integração TMDB
-```html
-# Abrir test-tmdb-integration.html no navegador
-```
-
-### 📊 Cobertura de Testes
-- ✅ **Autenticação**: Login, registro, logout
-- ✅ **Navegação**: Rotas protegidas, redirects
-- ✅ **API**: Endpoints CRUD completos
-- ✅ **UI/UX**: Responsividade, interações
-- ✅ **Integração**: TMDB API, dados externos
+### Configuração de CORS
+O backend está configurado para aceitar requisições do frontend em `http://localhost:4200`.
 
 ## 🤝 Contribuição
 
-### 🛠️ Como Contribuir
+1. Fork o projeto
+2. Crie sua feature branch (`git checkout -b feature/MinhaFeature`)
+3. Commit suas mudanças (`git commit -m 'Add: nova feature'`)
+4. Push para a branch (`git push origin feature/MinhaFeature`)
+5. Abra um Pull Request
 
-1. **Fork o projeto**
-2. **Crie uma branch**: `git checkout -b feature/nova-funcionalidade`
-3. **Commit suas mudanças**: `git commit -m 'feat: adiciona nova funcionalidade'`
-4. **Push para a branch**: `git push origin feature/nova-funcionalidade`
-5. **Abra um Pull Request**
+## 📄 Licença
 
-### 📝 Padrões de Commit
+Este projeto é licenciado sob a MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
+
+## 🎯 Estrutura do Projeto
+
 ```
-feat: nova funcionalidade
-fix: correção de bug
-docs: documentação
-style: formatação
-refactor: refatoração
-test: testes
-chore: manutenção
+CINEAPP/
+├── movies-api/          # Backend Spring Boot
+│   ├── src/main/java/   # Código fonte Java
+│   ├── src/main/resources/ # Configurações e dados
+│   └── pom.xml          # Dependências Maven
+├── movies-front/        # Frontend Angular
+│   ├── src/app/         # Código fonte Angular
+│   ├── src/assets/      # Recursos estáticos
+│   └── package.json     # Dependências npm
+├── *.ps1               # Scripts PowerShell
+└── README.md           # Este arquivo
 ```
 
-### 🎯 Áreas para Contribuição
-- 🎨 **UI/UX**: Melhorias de interface
-- 🔧 **Performance**: Otimizações
-- 🧪 **Testes**: Cobertura adicional
-- 📱 **Mobile**: Experiência mobile
-- 🌐 **Acessibilidade**: A11y improvements
+## 📧 Contato
 
-## 📞 Contato
-
-**Desenvolvedor**: Rodrigo Ribeiro  
-**GitHub**: [@d1g4odev](https://github.com/d1g4odev)  
-**Projeto**: [PAÇOCAFLIX](https://github.com/d1g4odev/PACOCAFLIX)
+Para dúvidas ou sugestões, entre em contato:
+- **GitHub:** [seu-usuario](https://github.com/seu-usuario)
+- **Email:** seu-email@exemplo.com
 
 ---
 
-<div align="center">
-
-### 🎬 **PAÇOCAFLIX** - *Sua próxima obsessão cinematográfica* 🍿
-
-[![GitHub stars](https://img.shields.io/github/stars/d1g4odev/PACOCAFLIX.svg?style=social&label=Star)](https://github.com/d1g4odev/PACOCAFLIX)
-[![GitHub forks](https://img.shields.io/github/forks/d1g4odev/PACOCAFLIX.svg?style=social&label=Fork)](https://github.com/d1g4odev/PACOCAFLIX/fork)
-
-</div> 
+**PAÇOCAFLIX** - Desenvolvido com ❤️ usando Angular + Spring Boot 

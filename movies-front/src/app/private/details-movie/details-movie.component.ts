@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Evaluation } from 'src/app/models/Evaluation';
 import { Movie } from 'src/app/models/Movie';
@@ -14,7 +14,7 @@ let cont = 0;
   templateUrl: './details-movie.component.html',
   styleUrls: ['./details-movie.component.scss']
 })
-export class DetailsMovieComponent implements OnInit {
+export class DetailsMovieComponent implements OnInit, OnDestroy {
 
   public comment: string | undefined
   public authorName: string | undefined
@@ -27,6 +27,7 @@ export class DetailsMovieComponent implements OnInit {
   public isFavorited: boolean = false
   public favoriteLoading: boolean = false
   public evaluationLoading: boolean = false
+  public hoverRating: number = 0
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -37,8 +38,7 @@ export class DetailsMovieComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    // Forçar scroll to top imediato
-    this.scrollToTop();
+    this.forceScrollToTop();
     
     let id = Number(this.activeRoute.snapshot.paramMap.get('id'));
     
@@ -75,22 +75,34 @@ export class DetailsMovieComponent implements OnInit {
     }
   }
 
-  // Método robusto para scroll to top
-  private scrollToTop(): void {
-    // Scroll imediato
+  ngOnDestroy(): void {
+    this.clearMemory();
+  }
+
+  private forceScrollToTop(): void {
     window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     
-    // Backup com smooth após DOM render
     setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }, 0);
     
-    // Backup final para garantir
     setTimeout(() => {
       if (window.pageYOffset > 0) {
         window.scrollTo(0, 0);
       }
-    }, 100);
+    }, 50);
+  }
+
+  private clearMemory(): void {
+    this.evaluations = [];
+    this.movie = null;
+    this.foundMovie = undefined;
+    this.linkTrailer = '';
+    this.comment = '';
+    this.userRating = 5;
+    this.isFavorited = false;
   }
 
   returnSrc(path: string| undefined): string | undefined{
@@ -122,7 +134,16 @@ export class DetailsMovieComponent implements OnInit {
   checkFavoriteStatus(movieId: number): void {
     const currentUser = this.authService.getCurrentUser();
     if (currentUser) {
-      this.isFavorited = false;
+      this.http.get(`http://localhost:8080/api/favorites/check/${currentUser.id}/${movieId}`)
+        .subscribe({
+          next: (response: any) => {
+            this.isFavorited = response.isFavorite;
+          },
+          error: (error) => {
+            console.error('Erro ao verificar status do favorito:', error);
+            this.isFavorited = false;
+          }
+        });
     }
   }
 
@@ -134,25 +155,26 @@ export class DetailsMovieComponent implements OnInit {
     
     const favoriteData = {
       userId: currentUser.id,
-      movieId: this.movie.id,
-      movieData: {
-        title: this.movie.title,
-        description: this.movie.overview,
-        idAPI: this.movie.id,
-        releaseDate: this.movie.release_date,
-        posterUrl: this.movie.poster_path,
-        genre: this.movie.genres?.[0]?.name
-      }
+      movieId: this.movie.id
     };
 
-    this.http.post('http://localhost:8080/api/favorites/toggle', favoriteData)
+    const endpoint = this.isFavorited ? 
+      'http://localhost:8080/api/favorites/remove' : 
+      'http://localhost:8080/api/favorites/add';
+
+    this.http.post(endpoint, favoriteData)
       .subscribe({
         next: (response: any) => {
-          this.isFavorited = response.isFavorite;
+          if (response.success) {
+            this.isFavorited = !this.isFavorited;
+            alert(response.message);
+          } else {
+            alert(response.message || 'Erro ao alterar favorito');
+          }
         },
         error: (error) => {
           console.error('Erro ao alterar favorito:', error);
-          alert('Erro ao alterar favorito!');
+          alert('Erro ao alterar favorito: ' + (error.error?.message || 'Verifique se o backend está rodando'));
         },
         complete: () => {
           this.favoriteLoading = false;
@@ -220,7 +242,11 @@ export class DetailsMovieComponent implements OnInit {
 
   goToHome(): void {
     this.router.navigate(['/home']).then(() => {
-      this.scrollToTop();
+      this.forceScrollToTop();
     });
+  }
+
+  setRating(rating: number): void {
+    this.userRating = Math.min(5, Math.max(1, rating));
   }
 }

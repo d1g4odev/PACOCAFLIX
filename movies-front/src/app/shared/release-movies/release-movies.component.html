@@ -1,4 +1,3 @@
-
 <div *ngIf="listMovies.length != 0" class="center black" >
 
     <h1 class="title1-genre"> Lançamentos</h1>
@@ -15,15 +14,29 @@
         <ng-template *ngFor="let movie of listMovies" swiperSlide>
             <div class="movie-card">
                 <div (click)="gotoDetails(movie?.id)" class="movie-image">    
+                    <!-- Favorite Button (Heart Icon) -->
+                    <button 
+                        class="favorite-btn" 
+                        [class.favorited]="isFavorite(movie?.id)"
+                        (click)="toggleFavorite(movie); $event.stopPropagation()"
+                        [disabled]="favoriteLoading"
+                        title="{{ isFavorite(movie?.id) ? 'Remover dos favoritos' : 'Adicionar aos favoritos' }}"
+                    >
+                        <span class="heart-icon">{{ isFavorite(movie?.id) ? '❤️' : '🤍' }}</span>
+                    </button>
+                    
                     <img [src]="returnSrc(movie?.poster_path)" class="img-movie" alt="">
+                    
+                    <!-- Rating Badge -->
+                    <div class="rating-badge-overlay" *ngIf="movie?.vote_average">
+                        <app-star-rating 
+                            [rating]="(movie?.vote_average / 2)" 
+                            [readonly]="true" 
+                            [showValue]="false">
+                        </app-star-rating>
+                    </div>
                 </div>
-                <button 
-                    class="favorite-heart-btn"
-                    [class.favorited]="isFavorited(movie?.id)"
-                    (click)="toggleFavorite(movie)"
-                    [disabled]="favoriteLoading">
-                    {{ isFavorited(movie?.id) ? '❤️' : '🤍' }}
-                </button>
+                
             </div>
         </ng-template>
     </swiper>

@@ -71,19 +71,7 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     const user = localStorage.getItem('user');
-    const currentUser = this.currentUserSubject.value;
-    
-    const isAuthenticated = !!(user && currentUser);
-    console.log('🔍 AuthService: Verificando autenticação:', isAuthenticated);
-    
-    // Se há inconsistência, limpar tudo
-    if ((user && !currentUser) || (!user && currentUser)) {
-      console.log('⚠️ AuthService: Inconsistência detectada, limpando dados');
-      this.clearAuthData();
-      return false;
-    }
-    
-    return isAuthenticated;
+    return !!user;
   }
 
   private clearAuthData(): void {
@@ -94,7 +82,8 @@ export class AuthService {
   logout(): void {
     console.log('🚪 AuthService: Fazendo logout');
     this.clearAuthData();
-    // Não redirecionar automaticamente aqui, deixar para o componente decidir
+    localStorage.removeItem('user');
+    this.currentUserSubject.next(null);
   }
 
   getUserName(): string {

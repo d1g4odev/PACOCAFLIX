@@ -10,7 +10,7 @@
       <!-- Top Navigation -->
       <div class="top-nav">
         <a href="#" class="nav-link text-sm active" (click)="goToHome()">Início</a>
-        <a href="#" class="nav-link text-sm" (click)="goToFavorites()">Meus Favoritos</a>
+        <a class="nav-link text-sm" (click)="goToFavorites(); $event.preventDefault()">❤️ Filmes Favoritos</a>
         
         <!-- User Menu -->
         <div class="user-menu">
@@ -47,60 +47,12 @@
       <!-- Simple Navigation -->
       <div class="navbar-nav">
         <a href="#" class="nav-link text-sm active" (click)="goToHome()">Início</a>
-        <a href="#" class="nav-link text-sm" (click)="goToFavorites()">Favoritos</a>
+        <a class="nav-link text-sm" (click)="goToFavorites(); $event.preventDefault()">❤️ Favoritos</a>
         <button class="btn btn-secondary btn-small" (click)="logout()">Sair</button>
       </div>
     </div>
   </div>
 </nav>
-
-<!-- Debug Panel (Temporário) -->
-<div class="debug-panel" *ngIf="showDebugPanel">
-  <div class="container">
-    <div class="debug-content">
-      <h4>🔍 Debug de Autenticação</h4>
-      <div class="debug-grid">
-        <div class="debug-item">
-          <strong>AuthService.isLoggedIn():</strong>
-          <span [class]="authService.isLoggedIn() ? 'success' : 'error'">
-            {{ authService.isLoggedIn() }}
-          </span>
-        </div>
-        <div class="debug-item">
-          <strong>AuthService.getCurrentUser():</strong>
-          <span [class]="authService.getCurrentUser() ? 'success' : 'error'">
-            {{ authService.getCurrentUser() ? 'OK' : 'NULL' }}
-          </span>
-        </div>
-        <div class="debug-item">
-          <strong>localStorage.user:</strong>
-          <span [class]="hasUserInStorage() ? 'success' : 'error'">
-            {{ hasUserInStorage() ? 'EXISTS' : 'MISSING' }}
-          </span>
-        </div>
-        <div class="debug-item">
-          <strong>Nome do usuário:</strong>
-          <span class="info">{{ getCurrentUserName() }}</span>
-        </div>
-      </div>
-      <div class="debug-actions">
-        <button class="btn btn-primary btn-small" (click)="testFavorites()">
-          🧪 Testar Favoritos
-        </button>
-        <button class="btn btn-secondary btn-small" (click)="toggleDebugPanel()">
-          ❌ Fechar Debug
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Toggle Debug Button -->
-<div class="debug-toggle">
-  <button class="btn btn-secondary btn-small" (click)="toggleDebugPanel()">
-    {{ showDebugPanel ? '🔍' : '🔍 Debug' }}
-  </button>
-</div>
 
 <!-- Main Content -->
 <div class="main-content">
@@ -172,19 +124,12 @@
                 <div class="featured-content">
                   <p class="featured-genre text-sm">{{ movie?.genre?.name }}</p>
                   <h4 class="featured-title">{{ movie?.title }}</h4>
-                                     <div class="featured-actions">
-                     <button class="btn btn-primary btn-small">
-                       <span class="btn-icon">▶</span>
-                       Assistir
-                     </button>
-                     <button 
-                       class="favorite-btn text-xl" 
-                       [class.favorited]="isFavorite(movie.id)"
-                       [title]="isFavorite(movie.id) ? 'Remover dos favoritos' : 'Adicionar aos favoritos'"
-                     >
-                       <span class="heart-icon">♥</span>
-                     </button>
-                   </div>
+                                                       <div class="featured-actions">
+                    <button class="btn btn-primary btn-small">
+                      <span class="btn-icon">▶</span>
+                      Assistir
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

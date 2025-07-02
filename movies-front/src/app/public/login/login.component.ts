@@ -55,12 +55,12 @@ export class LoginComponent implements OnInit {
     // Scroll para o topo
     window.scrollTo(0, 0);
     
-    // Verificar se já está logado
-    if (this.authService.isLoggedIn()) {
-      console.log('👤 Login: Usuário já está logado, redirecionando');
-      this.router.navigate(['/home']);
-      return;
-    }
+    // DESABILITADO: Verificação de usuário logado que estava causando redirecionamento
+    // if (this.authService.isLoggedIn()) {
+    //   console.log('👤 Login: Usuário já está logado, redirecionando');
+    //   this.router.navigate(['/home']);
+    //   return;
+    // }
     
     // Capturar URL de retorno
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';

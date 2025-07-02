@@ -1,0 +1,166 @@
+<!-- Botão Home -->
+<nav class="home-button-container">
+    <button class="home-btn" (click)="goToHome()" aria-label="Voltar para a página inicial">
+        <span class="home-icon">🏠</span>
+        <span class="home-text">HOME</span>
+    </button>
+</nav>
+
+<main class="filmes-favoritos-container" role="main" aria-label="Meus Filmes Favoritos">
+    <header class="page-header">
+        <h1>
+            <span class="heart-icon">❤️</span>
+            Meus Filmes Favoritos
+        </h1>
+        <p class="subtitle">Sua coleção pessoal de filmes</p>
+    </header>
+
+    <section class="favorites-content" aria-live="polite">
+        <!-- Loading -->
+        <div *ngIf="isLoading" class="loading-container" role="status" aria-label="Carregando filmes favoritos">
+            <div class="loading-spinner"></div>
+            <p>Carregando seus filmes favoritos...</p>
+        </div>
+
+        <!-- Erro -->
+        <div *ngIf="error && !isLoading" class="error-container" role="alert">
+            <div class="error-icon">⚠️</div>
+            <h2>Ops! Algo deu errado</h2>
+            <p>{{ error }}</p>
+            <button class="retry-button" (click)="loadFavorites()">
+                <span class="btn-icon">🔄</span>
+                Tentar Novamente
+            </button>
+        </div>
+
+        <!-- Sem favoritos -->
+        <div *ngIf="!isLoading && !error && favoriteMovies.length === 0" class="no-favorites" role="alert">
+            <div class="empty-icon">💔</div>
+            <h2>Nenhum filme favoritado ainda</h2>
+            <p>Que tal começar explorando alguns filmes incríveis?</p>
+            <button class="cta-button" (click)="goToHome()" aria-label="Ir para página inicial para descobrir filmes">
+                <span class="btn-icon">🎬</span>
+                Descobrir Filmes
+            </button>
+        </div>
+
+        <!-- Lista de favoritos -->
+        <div *ngIf="!isLoading && !error && favoriteMovies.length > 0" class="favorites-grid" role="list">
+            <article 
+                *ngFor="let movie of favoriteMovies; trackBy: trackByMovieId" 
+                class="movie-card" 
+                role="listitem"
+                [attr.aria-label]="'Filme: ' + (movie.title || 'Título não disponível')"
+            >
+                <!-- Botão de remoção fixo -->
+                <button 
+                    class="remove-favorite-btn"
+                    (click)="removeFavorite(movie, $event)"
+                    [attr.aria-label]="'Remover ' + (movie.title || 'filme') + ' dos favoritos'"
+                    title="Remover dos Favoritos"
+                >
+                    <span class="remove-icon">✕</span>
+                </button>
+
+                <!-- Poster do filme -->
+                <div class="movie-poster" (click)="openMovieDetails(movie.id)">
+                    <img 
+                        [src]="getMoviePosterUrl(movie)" 
+                        [alt]="'Poster do filme ' + (movie.title || 'Título não disponível')"
+                        class="poster-img"
+                        loading="lazy"
+                        (error)="onImageError($event)"
+                    />
+
+                    <!-- Badge de rating no poster -->
+                    <div class="rating-badge">
+                        <div class="stars-inline-favoritos">
+                            <ng-container *ngFor="let star of getStarsArray(movie); let i = index">
+                                <span 
+                                    class="star-inline-favoritos"
+                                    [class.filled]="star"
+                                    [attr.aria-hidden]="true"
+                                >★</span>
+                            </ng-container>
+                            <span class="rating-value-favoritos">{{ getDisplayRating(movie) }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Overlay com ações -->
+                    <div class="movie-overlay">
+                        <div class="overlay-content">
+                            <button 
+                                class="action-btn primary-btn"
+                                (click)="openMovieDetails(movie.id); $event.stopPropagation()"
+                                [attr.aria-label]="'Ver detalhes de ' + (movie.title || 'filme')"
+                            >
+                                <span class="btn-icon">👁️</span>
+                                Ver Detalhes
+                            </button>
+                            <button 
+                                class="action-btn danger-btn"
+                                (click)="removeFavorite(movie, $event)"
+                                [attr.aria-label]="'Remover ' + (movie.title || 'filme') + ' dos favoritos'"
+                            >
+                                <span class="btn-icon">🗑️</span>
+                                Remover
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informações do filme -->
+                <div class="movie-info">
+                    <h3 
+                        class="movie-title" 
+                        (click)="openMovieDetails(movie.id)"
+                        [attr.aria-label]="'Título: ' + (movie.title || 'Título não disponível')"
+                    >
+                        {{ movie.title || 'Título não disponível' }}
+                    </h3>
+
+                    <div class="movie-meta">
+                        <span class="movie-year" *ngIf="movie.release_date">
+                            {{ getMovieYear(movie.release_date) }}
+                        </span>
+                        <span class="movie-genre" *ngIf="movie.genres && movie.genres[0]">
+                            {{ movie.genres[0].name }}
+                        </span>
+                    </div>
+
+                    <!-- Rating detalhado -->
+                    <div class="movie-rating-info">
+                        <div class="stars-inline-favoritos" [attr.aria-label]="'Avaliação: ' + getDisplayRating(movie) + ' de 5 estrelas'">
+                            <ng-container *ngFor="let star of getStarsArray(movie); let i = index">
+                                <span 
+                                    class="star-inline-favoritos"
+                                    [class.filled]="star"
+                                    [attr.aria-hidden]="true"
+                                >★</span>
+                            </ng-container>
+                            <span class="rating-value-favoritos">{{ getDisplayRating(movie) }}</span>
+                        </div>
+                    </div>
+
+                    <!-- Ações na parte inferior -->
+                    <div class="movie-actions-bottom">
+                        <button 
+                            class="icon-btn details-btn"
+                            (click)="openMovieDetails(movie.id)"
+                            [attr.aria-label]="'Ver detalhes de ' + (movie.title || 'filme')"
+                        >
+                            📄 Detalhes
+                        </button>
+                        <button 
+                            class="icon-btn remove-btn"
+                            (click)="removeFavorite(movie, $event)"
+                            [attr.aria-label]="'Remover ' + (movie.title || 'filme') + ' dos favoritos'"
+                        >
+                            🗑️ Remover
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</main> 

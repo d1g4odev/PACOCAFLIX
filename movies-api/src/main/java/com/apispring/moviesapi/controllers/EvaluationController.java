@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import reactor.core.publisher.Mono;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Validated
 @RestController
@@ -23,6 +27,8 @@ public class EvaluationController {
     
     @Autowired
     private EvaluationService evaluationService;
+
+    private Map<String, String> evaluations = new HashMap<>();
 
     @CrossOrigin
     @PostMapping("/save")
@@ -55,5 +61,18 @@ public class EvaluationController {
     @GetMapping("/all")
     public Mono<?> findAllEvaluations() throws Exception{
         return Mono.just(evaluationService.findAll());
+    }
+
+    @GetMapping("/evaluations/{movieId}")
+    public Map<String, String> getEvaluations(@PathVariable String movieId) {
+        // Mocked response
+        return evaluations;
+    }
+
+    @PostMapping("/evaluations")
+    public String addEvaluation(@RequestBody Map<String, String> evaluation) {
+        // Mocked behavior
+        evaluations.put(evaluation.get("movieId"), evaluation.get("review"));
+        return "Avaliação adicionada com sucesso!";
     }
 }

@@ -23,9 +23,9 @@ export class HomeComponent implements OnInit {
   popularMovies: Array<any> = [];
   nowPlayingMovies: Array<any> = [];
   isScrolled: boolean = false;
-  favoriteMovies: Set<number> = new Set();
+
   showUserMenu: boolean = false;
-  showDebugPanel: boolean = false;
+
 
   constructor(
     private movieDbService: MovieDbService,
@@ -35,30 +35,26 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Forçar scroll to top imediato
     this.scrollToTop();
     
     this.loadPopularMovies();
     this.loadNowPlayingMovies();
-    this.loadFavorites();
   }
 
-  // Método robusto para scroll to top
   private scrollToTop(): void {
-    // Scroll imediato
     window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     
-    // Backup com smooth após DOM render
     setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: 'auto' });
     }, 0);
     
-    // Backup final para garantir
     setTimeout(() => {
       if (window.pageYOffset > 0) {
         window.scrollTo(0, 0);
       }
-    }, 100);
+    }, 50);
   }
 
   // Listen to scroll events for floating navbar
@@ -141,52 +137,15 @@ export class HomeComponent implements OnInit {
   logout(): void {
     this.showUserMenu = false;
     this.authService.logout();
-    this.router.navigate(['/login']);
-  }
-
-  goToFavorites(): void {
-    this.showUserMenu = false;
-    console.log('🔗 Home: Navegando para favoritos...');
-    console.log('🔍 Home: Estado atual de autenticação:', this.authService.isLoggedIn());
-    console.log('👤 Home: Usuário atual:', this.authService.getCurrentUser());
-    
-    // Pequeno delay para garantir que o estado de autenticação está estável
-    setTimeout(() => {
-      this.router.navigate(['/favorites']).then(() => {
-        console.log('✅ Home: Navegação para favoritos completada');
-        this.scrollToTop();
-      }).catch(error => {
-        console.error('❌ Home: Erro na navegação para favoritos:', error);
-      });
-    }, 100);
+    this.router.navigate(['/login']).then(() => {
+      window.location.reload();
+    });
   }
 
   goToAccount(): void {
     this.showUserMenu = false;
     // Para agora, vamos apenas mostrar um alerta
     alert(`Informações da conta de ${this.getCurrentUserName()}\n\nEsta funcionalidade será implementada em breve.`);
-  }
-
-  // Load user's favorite movies
-  loadFavorites(): void {
-    // TODO: Implement API call to load user favorites
-    // For now, using mock data
-    this.favoriteMovies = new Set([550, 299536, 157336]); // Mock favorite movie IDs
-  }
-
-  // Check if a movie is in favorites
-  isFavorite(movieId: number): boolean {
-    return this.favoriteMovies.has(movieId);
-  }
-
-  // Toggle favorite status
-  toggleFavorite(movieId: number): void {
-    if (this.isFavorite(movieId)) {
-      this.favoriteMovies.delete(movieId);
-    } else {
-      this.favoriteMovies.add(movieId);
-    }
-    // TODO: Implement API call to update favorites
   }
 
   goToHome(): void {
@@ -196,24 +155,35 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  // Debug Methods
-  toggleDebugPanel(): void {
-    this.showDebugPanel = !this.showDebugPanel;
-    console.log('🔍 Debug Panel:', this.showDebugPanel ? 'ABERTO' : 'FECHADO');
+  goToFavorites(): void {
+    console.log('🎬 HOME: Clicou em Filmes Favoritos');
+    console.log('🎬 HOME: Tentando navegar para /filmes-favoritos');
+    this.showUserMenu = false;
+    
+    // Força scroll para o topo antes da navegação
+    window.scrollTo(0, 0);
+    
+    this.router.navigate(['/filmes-favoritos']).then((success: boolean) => {
+      console.log('🎬 HOME: Navegação bem-sucedida?', success);
+      if (success) {
+        console.log('🎬 HOME: Navegação realizada com sucesso!');
+        // Força scroll novamente após navegação
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 100);
+      } else {
+        console.error('🎬 HOME: ERRO na navegação para /filmes-favoritos');
+        // Fallback: navegação forçada
+        window.location.href = '/filmes-favoritos';
+      }
+    }).catch((error) => {
+      console.error('🎬 HOME: ERRO na navegação:', error);
+      // Fallback: navegação forçada
+      window.location.href = '/filmes-favoritos';
+    });
   }
 
   hasUserInStorage(): boolean {
     return !!localStorage.getItem('user');
   }
-
-  testFavorites(): void {
-    console.log('🧪 Testando navegação para favoritos...');
-    console.log('📊 Estado atual:');
-    console.log('  - AuthService.isLoggedIn():', this.authService.isLoggedIn());
-    console.log('  - AuthService.getCurrentUser():', this.authService.getCurrentUser());
-    console.log('  - localStorage.user:', !!localStorage.getItem('user'));
-    
-    this.goToFavorites();
-  }
-
 }

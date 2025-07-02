@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
-
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/home',
     pathMatch: 'full'
   },
   {
@@ -20,21 +18,21 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import("./private/home/home.module").then(m => m.HomeModule),
-    canActivate: [AuthGuard]
+    loadChildren: () => import("./private/home/home.module").then(m => m.HomeModule)
   },
   {
     path: 'details/:id',
-    loadChildren: () => import("./private/details-movie/details-movie.module").then(m => m.DetailsMovieModule),
-    canActivate: [AuthGuard]
+    loadChildren: () => import("./private/details-movie/details-movie.module").then(m => m.DetailsMovieModule)
   },
   {
-    path: 'favorites',
-    loadChildren: () => import("./private/favorites/favorites.module").then(m => m.FavoritesModule),
-    canActivate: [AuthGuard]
+    path: 'filmes-favoritos',
+    loadChildren: () => import("./private/filmes-favoritos/filmes-favoritos.module").then(m => m.FilmesFavoritosModule)
+  },
+  {
+    path: '**',
+    redirectTo: '/home'
   }
 ];
-
 
 @NgModule({
   declarations: [],
@@ -42,7 +40,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'top',
       anchorScrolling: 'enabled',
-      scrollOffset: [0, 0]
+      scrollOffset: [0, 0],
+      enableTracing: false
     })
   ],
   exports:[RouterModule]

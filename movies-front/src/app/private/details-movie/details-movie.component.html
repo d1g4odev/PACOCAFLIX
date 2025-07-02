@@ -42,11 +42,16 @@
                         👤 {{ evaluation?.authorName || evaluation?.name || 'Usuário Anônimo' }}
                     </span>
                     <div class="rating-section">
-                        <app-star-rating 
-                            [rating]="evaluation?.score || evaluation?.rating || 0" 
-                            [readonly]="true" 
-                            [showValue]="true">
-                        </app-star-rating>
+                        <div class="stars-inline">
+                            <span *ngFor="let star of [1,2,3,4,5]; let i = index" 
+                                  class="star-inline"
+                                  [class.filled]="i < (evaluation?.score || evaluation?.rating || 0)">
+                                ★
+                            </span>
+                            <span class="rating-value-inline">
+                                {{ (evaluation?.score || evaluation?.rating || 0).toFixed(1) }}/5
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <p class="dds__text-white evaluation-comment">
@@ -82,11 +87,19 @@
 
             <div class="form-group">
                 <label class="dds__text-white">Sua avaliação:</label>
-                <app-star-rating 
-                    [(rating)]="userRating" 
-                    [readonly]="false" 
-                    [showValue]="true">
-                </app-star-rating>
+                <div class="stars-interactive">
+                    <span *ngFor="let star of [1,2,3,4,5]; let i = index" 
+                          class="star-interactive"
+                          [class.filled]="i < userRating"
+                          (click)="setRating(i + 1)"
+                          (mouseenter)="hoverRating = i + 1"
+                          (mouseleave)="hoverRating = 0">
+                        ★
+                    </span>
+                    <span class="rating-value-inline">
+                        {{ userRating.toFixed(1) }}/5
+                    </span>
+                </div>
             </div>
 
             <div class="form-group">
