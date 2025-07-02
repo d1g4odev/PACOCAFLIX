@@ -15,10 +15,24 @@ export class AuthService {
     private http: HttpClient,
     private router: Router
   ) {
-    // Verificar se há usuário logado no localStorage
-    const user = localStorage.getItem('user');
-    if (user) {
-      this.currentUserSubject.next(JSON.parse(user));
+    // Verificar se há usuário logado no localStorage ao inicializar
+    this.initializeAuthState();
+  }
+
+  private initializeAuthState(): void {
+    try {
+      const user = localStorage.getItem('user');
+      if (user) {
+        const userData = JSON.parse(user);
+        console.log('🔄 AuthService: Inicializando com usuário:', userData.name);
+        this.currentUserSubject.next(userData);
+      } else {
+        console.log('🔄 AuthService: Nenhum usuário encontrado no localStorage');
+      }
+    } catch (error) {
+      console.error('❌ AuthService: Erro ao parsear dados do usuário:', error);
+      localStorage.removeItem('user');
+      this.currentUserSubject.next(null);
     }
   }
 
@@ -31,22 +45,56 @@ export class AuthService {
   }
 
   setCurrentUser(user: any): void {
+    console.log('✅ AuthService: Definindo usuário atual:', user.name);
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSubject.next(user);
   }
 
   getCurrentUser(): any {
-    return this.currentUserSubject.value;
+    const user = this.currentUserSubject.value;
+    if (!user) {
+      // Tentar recuperar do localStorage se não estiver no BehaviorSubject
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        try {
+          const userData = JSON.parse(storedUser);
+          this.currentUserSubject.next(userData);
+          return userData;
+        } catch (error) {
+          console.error('❌ AuthService: Erro ao recuperar usuário do localStorage:', error);
+          localStorage.removeItem('user');
+        }
+      }
+    }
+    return user;
   }
 
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('user');
+    const user = localStorage.getItem('user');
+    const currentUser = this.currentUserSubject.value;
+    
+    const isAuthenticated = !!(user && currentUser);
+    console.log('🔍 AuthService: Verificando autenticação:', isAuthenticated);
+    
+    // Se há inconsistência, limpar tudo
+    if ((user && !currentUser) || (!user && currentUser)) {
+      console.log('⚠️ AuthService: Inconsistência detectada, limpando dados');
+      this.clearAuthData();
+      return false;
+    }
+    
+    return isAuthenticated;
+  }
+
+  private clearAuthData(): void {
+    localStorage.removeItem('user');
+    this.currentUserSubject.next(null);
   }
 
   logout(): void {
-    localStorage.removeItem('user');
-    this.currentUserSubject.next(null);
-    this.router.navigate(['/login']);
+    console.log('🚪 AuthService: Fazendo logout');
+    this.clearAuthData();
+    // Não redirecionar automaticamente aqui, deixar para o componente decidir
   }
 
   getUserName(): string {

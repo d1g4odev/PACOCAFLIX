@@ -1,25 +1,53 @@
+// Netflix Color Palette
+$netflix-red: #e50914;
+$netflix-dark-red: #b20710;
+$netflix-black: #000000;
+$netflix-dark-gray: #141414;
+$netflix-gray: #333333;
+$netflix-light-gray: #757575;
+$netflix-white: #ffffff;
+
 .title1-genre{
     border-radius: 30px;
-    color: white;
-    font-size: 1cm;
+    color: $netflix-white;
     vertical-align: middle;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 2rem;
 }
 
 .black{
     padding-top: 60px;
-    //padding-bottom: 40px;
-    background-image:  linear-gradient( rgb(51, 51, 51), black);
+    background: linear-gradient(to bottom, $netflix-dark-gray 0%, $netflix-black 100%);
+    min-height: 60vh;
 }
 
 .mySwiper{
     height: 50vh;
     background-color:  transparent;
+    
+    .swiper-pagination-bullet {
+        background-color: $netflix-light-gray;
+        opacity: 0.7;
+        
+        &.swiper-pagination-bullet-active {
+            background-color: $netflix-red;
+            opacity: 1;
+        }
+    }
 }
 
 .img-movie{
     border-radius: 10px;
     width: 200px;
     height: 300px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
 }
 
 .center{
@@ -52,10 +80,12 @@
     justify-content: center;
     transition: all 0.3s ease;
     z-index: 10;
+    color: $netflix-white;
     
     &:hover:not(:disabled) {
         background: rgba(0, 0, 0, 0.9);
         transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     }
     
     &:disabled {
@@ -64,10 +94,43 @@
     }
     
     &.favorited {
-        background: rgba(255, 0, 0, 0.8);
+        background: rgba(229, 9, 20, 0.8);
+        color: $netflix-white;
         
         &:hover:not(:disabled) {
-            background: rgba(255, 0, 0, 1);
+            background: rgba(229, 9, 20, 1);
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.5);
         }
+    }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .mySwiper {
+        height: 40vh;
+    }
+    
+    .img-movie {
+        width: 150px;
+        height: 225px;
+    }
+    
+    .favorite-heart-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .img-movie {
+        width: 120px;
+        height: 180px;
+    }
+    
+    .favorite-heart-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
     }
 }

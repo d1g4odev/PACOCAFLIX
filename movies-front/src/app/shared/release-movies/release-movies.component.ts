@@ -120,6 +120,23 @@ export class ReleaseMoviesComponent implements OnInit {
   }
 
   gotoDetails(id: number | undefined){
-    this.router.navigate(["/details/", id]);
+    if (id) {
+      this.router.navigate(["/details/", id]).then(() => {
+        // Múltiplas tentativas para garantir scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Backup imediato
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 50);
+        
+        // Backup final
+        setTimeout(() => {
+          if (window.pageYOffset > 0) {
+            window.scrollTo(0, 0);
+          }
+        }, 200);
+      });
+    }
   }
 }

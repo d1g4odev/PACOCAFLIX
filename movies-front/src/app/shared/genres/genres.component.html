@@ -1,22 +1,21 @@
-
 <div>
     <div class="div_genres">
-        <div class="center">
-            <h1 class="title-genres"> Gêneros</h1>
-        </div>
+        <h2 class="title-genres">Gêneros</h2>
         
         <div class="btns-div">
-            <button class="dds__btn btn_genres dds__text-white" *ngFor="let genre of genres" (click)="getMoviesByGenre(genre)">
-                <b>
-                    {{ genre?.name }}
-                </b>
+            <button 
+                class="btn_genres" 
+                *ngFor="let genre of genres" 
+                (click)="getMoviesByGenre(genre)"
+                [title]="'Ver filmes de ' + genre?.name"
+            >
+                {{ genre?.name }}
             </button>
         </div>
     </div>
     
-    <div *ngIf="listMovies.length != 0" class="center black" >
-        
-        <h1 [innerHtml]="genrerNameChoose" class="title1-genre"></h1>
+    <div *ngIf="listMovies.length != 0" class="center black">
+        <h3 [innerHtml]="genrerNameChoose" class="title1-genre"></h3>
         
         <swiper
             #swiperRef
@@ -28,13 +27,16 @@
             class="mySwiper"
         >
             <ng-template *ngFor="let movie of listMovies" swiperSlide>
-                <div (click)="gotoDetails(movie?.id)">    
-                    <img [src]="returnSrc(movie?.poster_path)" class="img-movie" alt="">
+                <div (click)="gotoDetails(movie?.id)" class="movie-slide">    
+                    <img 
+                        [src]="returnSrc(movie?.poster_path)" 
+                        class="img-movie" 
+                        [alt]="movie?.title || 'Poster do filme'"
+                        loading="lazy"
+                    >
                 </div>
             </ng-template>
         </swiper>
-    
     </div>
-
 </div>
 

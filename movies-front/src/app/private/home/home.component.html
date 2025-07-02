@@ -1,64 +1,204 @@
-
-<!-- Header com informações do usuário -->
-<div class="user-header">
-  <div class="user-info">
-    <span class="welcome-text">Bem-vindo, {{ getCurrentUserName() }}!</span>
-  </div>
-  <div class="header-actions">
-    <button class="favorites-btn" (click)="goToFavorites()">
-      ❤️ Meus Favoritos
-    </button>
-    <button class="logout-btn" (click)="logout()">
-      Sair
-    </button>
-  </div>
-</div>
-
-<app-search-bar></app-search-bar>
-
-<div class="banner" >
-    <div class="texts-main">
-        <h1 class="title-main">Avalie seus filmes favoritos</h1>
-        <h2 class="title-sec"> E aqueles que você não gostou tanto assim </h2>
-    </div>
-</div>
-
-<div class="swiper-div">
-  <swiper
-    #swiperRef
-    [slidesPerView]="'auto'"
-    [spaceBetween]="15"
-    [centeredSlides]="true"
-    [autoplay]="{
-      delay: 4000,
-      disableOnInteraction: false
-    }"
-    [scrollbar]="{
-      hide: true
-    }"
-    class="mySwiper"
-  >
-  <ng-template *ngFor="let movie of movies" swiperSlide>
-    <div class="img"  [style.background-image]="returnSrc(movie?.backdrop_path)"  (click)="gotoDetails(movie?.id)">
-
-      <div class="title-movie">
-        <div class="swiper_texts">
-          <span class="dds__text-white sub-title"  tabindex="0">
-            {{ movie?.genre?.name }}
-          </span>
-          <h2 class="dds__text-white title" tabindex="0">
-            {{ movie?.title }}
-          </h2>
+<!-- Logo Section - Fixed at top -->
+<div class="logo-section">
+  <div class="container">
+    <div class="d-flex justify-between align-center">
+      <!-- Logo -->
+      <div class="logo-container">
+        <h1 class="pacocaflix-logo" (click)="goToHome()">PAÇOCAFLIX</h1>
+      </div>
+      
+      <!-- Top Navigation -->
+      <div class="top-nav">
+        <a href="#" class="nav-link text-sm active" (click)="goToHome()">Início</a>
+        <a href="#" class="nav-link text-sm" (click)="goToFavorites()">Meus Favoritos</a>
+        
+        <!-- User Menu -->
+        <div class="user-menu">
+          <div class="user-info" (click)="toggleUserMenu()">
+            <span class="user-name">{{ getCurrentUserName() }}</span>
+            <span class="user-avatar">👤</span>
+            <span class="dropdown-arrow" [class.rotated]="showUserMenu">▼</span>
+          </div>
           
+          <div class="user-dropdown" [class.visible]="showUserMenu">
+            <a href="#" class="dropdown-item" (click)="goToAccount()">
+              <span class="item-icon">👤</span>
+              Minha Conta
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="#" class="dropdown-item logout-item" (click)="logout()">
+              <span class="item-icon">🚪</span>
+              Sair
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </ng-template>
-  </swiper>
+  </div>
 </div>
 
-<app-popular-movies></app-popular-movies>
+<!-- Floating Navbar - Appears on scroll (simplified) -->
+<nav class="floating-navbar" [class.visible]="isScrolled">
+  <div class="container">
+    <div class="d-flex justify-between align-center">
+      <!-- Mini Logo -->
+      <div class="mini-logo" (click)="goToHome()">PAÇOCAFLIX</div>
+      
+      <!-- Simple Navigation -->
+      <div class="navbar-nav">
+        <a href="#" class="nav-link text-sm active" (click)="goToHome()">Início</a>
+        <a href="#" class="nav-link text-sm" (click)="goToFavorites()">Favoritos</a>
+        <button class="btn btn-secondary btn-small" (click)="logout()">Sair</button>
+      </div>
+    </div>
+  </div>
+</nav>
 
-<app-genres></app-genres>
+<!-- Debug Panel (Temporário) -->
+<div class="debug-panel" *ngIf="showDebugPanel">
+  <div class="container">
+    <div class="debug-content">
+      <h4>🔍 Debug de Autenticação</h4>
+      <div class="debug-grid">
+        <div class="debug-item">
+          <strong>AuthService.isLoggedIn():</strong>
+          <span [class]="authService.isLoggedIn() ? 'success' : 'error'">
+            {{ authService.isLoggedIn() }}
+          </span>
+        </div>
+        <div class="debug-item">
+          <strong>AuthService.getCurrentUser():</strong>
+          <span [class]="authService.getCurrentUser() ? 'success' : 'error'">
+            {{ authService.getCurrentUser() ? 'OK' : 'NULL' }}
+          </span>
+        </div>
+        <div class="debug-item">
+          <strong>localStorage.user:</strong>
+          <span [class]="hasUserInStorage() ? 'success' : 'error'">
+            {{ hasUserInStorage() ? 'EXISTS' : 'MISSING' }}
+          </span>
+        </div>
+        <div class="debug-item">
+          <strong>Nome do usuário:</strong>
+          <span class="info">{{ getCurrentUserName() }}</span>
+        </div>
+      </div>
+      <div class="debug-actions">
+        <button class="btn btn-primary btn-small" (click)="testFavorites()">
+          🧪 Testar Favoritos
+        </button>
+        <button class="btn btn-secondary btn-small" (click)="toggleDebugPanel()">
+          ❌ Fechar Debug
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
-<app-release-movies></app-release-movies>
+<!-- Toggle Debug Button -->
+<div class="debug-toggle">
+  <button class="btn btn-secondary btn-small" (click)="toggleDebugPanel()">
+    {{ showDebugPanel ? '🔍' : '🔍 Debug' }}
+  </button>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+  
+  <!-- Creative Hero Section -->
+  <section class="creative-hero">
+    <div class="hero-gradient"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-logo">
+          <h1 class="brand-title">PAÇOCAFLIX</h1>
+          <p class="brand-subtitle">Sua plataforma de filmes favorita</p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">10K+</span>
+            <span class="stat-label">Filmes</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Séries</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">HD</span>
+            <span class="stat-label">Qualidade</span>
+          </div>
+        </div>
+        <div class="hero-cta">
+          <p class="welcome-text">Bem-vindo(a), {{ getCurrentUserName() }}! 🍿</p>
+          <p class="discover-text">Descubra sua próxima obsessão cinematográfica</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Bar -->
+  <div class="container">
+    <app-search-bar></app-search-bar>
+  </div>
+
+  <!-- Featured Movies Carousel -->
+  <section class="netflix-row" *ngIf="movies && movies.length > 0">
+    <div class="container">
+      <div class="row-header">
+        <h2>Filmes em Destaque</h2>
+        <span class="view-all-btn text-sm">Ver todos</span>
+      </div>
+      
+      <div class="featured-carousel">
+        <swiper
+          #swiperRef
+          [slidesPerView]="'auto'"
+          [spaceBetween]="15"
+          [centeredSlides]="true"
+          [autoplay]="{
+            delay: 4000,
+            disableOnInteraction: false
+          }"
+          [loop]="true"
+          class="featured-swiper"
+        >
+          <ng-template *ngFor="let movie of movies" swiperSlide>
+            <div 
+              class="featured-slide" 
+              [style.background-image]="returnSrc(movie?.backdrop_path)"
+              (click)="gotoDetails(movie?.id)"
+            >
+              <div class="featured-overlay">
+                <div class="featured-content">
+                  <p class="featured-genre text-sm">{{ movie?.genre?.name }}</p>
+                  <h4 class="featured-title">{{ movie?.title }}</h4>
+                                     <div class="featured-actions">
+                     <button class="btn btn-primary btn-small">
+                       <span class="btn-icon">▶</span>
+                       Assistir
+                     </button>
+                     <button 
+                       class="favorite-btn text-xl" 
+                       [class.favorited]="isFavorite(movie.id)"
+                       [title]="isFavorite(movie.id) ? 'Remover dos favoritos' : 'Adicionar aos favoritos'"
+                     >
+                       <span class="heart-icon">♥</span>
+                     </button>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </swiper>
+      </div>
+    </div>
+  </section>
+
+  <!-- Movie Sections -->
+  <div class="container">
+    <app-popular-movies></app-popular-movies>
+    <app-genres></app-genres>
+    <app-release-movies></app-release-movies>
+  </div>
+
+</div>

@@ -21,6 +21,7 @@ export class PopularMoviesComponent implements OnInit {
   public moviesPopular: Array<any> = [];
   public favoriteStates: Map<number, boolean> = new Map();
   public favoriteLoading: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(
     private movieDbService: MovieDbService,
@@ -30,6 +31,7 @@ export class PopularMoviesComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.movieDbService.getPopularMovies().subscribe({
       next: (response: any) => {
         this.moviesPopular = response.results;
@@ -37,10 +39,12 @@ export class PopularMoviesComponent implements OnInit {
         
         // Carregar status de favoritos
         this.loadFavoriteStates();
+        this.isLoading = false;
       },
       error: (error) => {
         console.error('Erro ao carregar filmes populares:', error);
         this.moviesPopular = [];
+        this.isLoading = false;
       }
     });
   }
@@ -107,6 +111,12 @@ export class PopularMoviesComponent implements OnInit {
       });
   }
 
+  // Toggle favorito com prevenção de propagação do evento
+  toggleFavoriteWithEvent(movie: any, event: Event): void {
+    event.stopPropagation(); // Previne que o clique ative o card do filme
+    this.toggleFavorite(movie);
+  }
+
   getImageUrl(posterPath: string): string {
     return this.movieDbService.getImageUrl(posterPath);
   }
@@ -119,6 +129,23 @@ export class PopularMoviesComponent implements OnInit {
   }
 
   gotoDetails(id: number | undefined){
-    this.router.navigate(["/details/", id]);
+    if (id) {
+      this.router.navigate(["/details/", id]).then(() => {
+        // Múltiplas tentativas para garantir scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Backup imediato
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 50);
+        
+        // Backup final
+        setTimeout(() => {
+          if (window.pageYOffset > 0) {
+            window.scrollTo(0, 0);
+          }
+        }, 200);
+      });
+    }
   }
 }

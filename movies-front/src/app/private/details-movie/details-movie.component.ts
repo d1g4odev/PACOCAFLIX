@@ -37,6 +37,9 @@ export class DetailsMovieComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    // Forçar scroll to top imediato
+    this.scrollToTop();
+    
     let id = Number(this.activeRoute.snapshot.paramMap.get('id'));
     
     this.movieDbService.getMovieDetails(id).subscribe({
@@ -70,6 +73,24 @@ export class DetailsMovieComponent implements OnInit {
     if (currentUser) {
       this.authorName = currentUser.name;
     }
+  }
+
+  // Método robusto para scroll to top
+  private scrollToTop(): void {
+    // Scroll imediato
+    window.scrollTo(0, 0);
+    
+    // Backup com smooth após DOM render
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 0);
+    
+    // Backup final para garantir
+    setTimeout(() => {
+      if (window.pageYOffset > 0) {
+        window.scrollTo(0, 0);
+      }
+    }, 100);
   }
 
   returnSrc(path: string| undefined): string | undefined{
@@ -198,6 +219,8 @@ export class DetailsMovieComponent implements OnInit {
   }
 
   goToHome(): void {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/home']).then(() => {
+      this.scrollToTop();
+    });
   }
 }

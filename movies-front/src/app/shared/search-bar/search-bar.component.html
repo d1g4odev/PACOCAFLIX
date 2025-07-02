@@ -1,27 +1,58 @@
-
 <div class="search-bar">
-    <div class="center ">
-        <input class="dds__p-2 input-search" type="text"  placeholder="Pesquisar" [(ngModel)]="name" (keydown.enter)="searchMovie()">
+    <div class="center">
+        <input 
+            class="input-search" 
+            type="text"  
+            placeholder="Pesquisar filmes..." 
+            [(ngModel)]="name" 
+            (keydown.enter)="searchMovie()"
+            (input)="searchMovie()"
+        >
     </div>
 </div>
 
-<div *ngIf="listMovies.length != 0" class="center black" >
+<div *ngIf="listMovies.length > 0" class="search-results">
+    <div class="container">
+        <h3 class="search-title">Resultados da busca para "{{ name }}"</h3>
         
-    <swiper
-        #swiperRef
-        [slidesPerView]="6"
-        [spaceBetween]="30"
-        [centeredSlides]="true"
-        [pagination]="{ clickable: true }"
-        class="mySwiper"
-    >
-        <ng-template *ngFor="let movie of listMovies" swiperSlide>
-            <div (click)="gotoDetails(movie?.id)">    
-                <img [src]="returnSrc(movie?.poster_path)" class="img-movie" alt="">
+        <div class="search-movies-grid">
+            <div 
+                *ngFor="let movie of listMovies; trackBy: trackByMovieId" 
+                class="search-movie-card"
+                (click)="gotoDetails(movie?.id)"
+            >
+                <div class="movie-poster-container">
+                    <img 
+                        [src]="returnSrc(movie?.poster_path)" 
+                        [alt]="movie?.title || 'Poster do filme'"
+                        class="search-movie-poster"
+                        loading="lazy"
+                        (error)="onImageError($event)"
+                    >
+                    <div class="movie-overlay">
+                        <div class="movie-info">
+                            <h6 class="movie-title">{{ movie?.title }}</h6>
+                            <p class="movie-year" *ngIf="movie?.release_date">
+                                {{ getYear(movie?.release_date) }}
+                            </p>
+                            <div class="movie-rating" *ngIf="movie?.vote_average">
+                                <span class="rating-star">★</span>
+                                {{ movie?.vote_average | number:'1.1-1' }}
+                            </div>
+                        </div>
+                        <button class="details-btn" [title]="'Ver detalhes de ' + movie?.title">
+                            <span class="btn-icon">▶</span>
+                        </button>
+                    </div>
+                </div>
             </div>
-        </ng-template>
-    </swiper>
-
-    <hr class="line">
+        </div>
+        
+        <div *ngIf="listMovies.length === 0 && name && name.trim() !== ''" class="no-results">
+            <div class="no-results-icon">🔍</div>
+            <h4>Nenhum filme encontrado</h4>
+            <p>Tente buscar com outros termos</p>
+        </div>
+    </div>
 </div>
 

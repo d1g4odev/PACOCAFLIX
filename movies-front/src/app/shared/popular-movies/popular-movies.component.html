@@ -1,31 +1,57 @@
 
-<div *ngIf="moviesPopular.length != 0" class="center black" >
-
-    <h1 class="title1-genre"> Mais populares</h1>
-        
-    <swiper
-        #swiperRef
-        [loop]="true"
-        [slidesPerView]="6"
-        [spaceBetween]="30"
-        [centeredSlides]="true"
-        [pagination]="{ clickable: true }"
-        class="mySwiper"
+<!-- Netflix Style Popular Movies Section -->
+<section class="netflix-row" *ngIf="moviesPopular.length > 0">
+  <div class="row-header">
+    <h3 class="section-title">Filmes Populares</h3>
+    <span class="view-all-btn">Ver todos</span>
+  </div>
+  
+  <!-- Netflix Grid Layout -->
+  <div class="netflix-grid">
+    <div 
+      *ngFor="let movie of moviesPopular" 
+      class="movie-card"
+      (click)="gotoDetails(movie?.id)"
     >
-        <ng-template *ngFor="let movie of moviesPopular" swiperSlide>
-            <div class="movie-card">
-                <div (click)="gotoDetails(movie?.id)" class="movie-image">    
-                    <img [src]="returnSrc(movie?.poster_path)" class="img-movie" alt="">
-                </div>
-                <button 
-                    class="favorite-heart-btn"
-                    [class.favorited]="isFavorited(movie?.id)"
-                    (click)="toggleFavorite(movie)"
-                    [disabled]="favoriteLoading">
-                    {{ isFavorited(movie?.id) ? '❤️' : '🤍' }}
-                </button>
-            </div>
-        </ng-template>
-    </swiper>
-
-</div>
+      <img 
+        [src]="returnSrc(movie?.poster_path)" 
+        [alt]="movie?.title"
+        class="movie-poster"
+        loading="lazy"
+      >
+      
+      <!-- Movie Overlay -->
+      <div class="movie-overlay">
+        <h6 class="movie-title">{{ movie?.title }}</h6>
+                 <p class="movie-rating text-sm" *ngIf="movie?.vote_average">
+           <span class="rating-star">★</span>
+           {{ movie?.vote_average | number:'1.1-1' }}
+         </p>
+         <div class="movie-actions">
+           <button 
+             class="favorite-btn text-xl"
+             [class.favorited]="isFavorited(movie?.id)"
+             (click)="toggleFavoriteWithEvent(movie, $event)"
+             [disabled]="favoriteLoading"
+             [title]="isFavorited(movie?.id) ? 'Remover dos favoritos' : 'Adicionar aos favoritos'"
+           >
+             <span class="heart-icon">♥</span>
+           </button>
+         </div>
+      </div>
+      
+      <!-- Loading State -->
+      <div class="loading-skeleton" *ngIf="!movie?.poster_path"></div>
+    </div>
+  </div>
+  
+  <!-- Loading Spinner -->
+  <div class="loading-spinner" *ngIf="isLoading">
+    <div class="spinner"></div>
+  </div>
+  
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="moviesPopular.length === 0 && !isLoading">
+    <p>Nenhum filme popular encontrado</p>
+  </div>
+</section>

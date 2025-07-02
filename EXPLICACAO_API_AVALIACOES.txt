@@ -1,0 +1,197 @@
+🎬 EXPLICAÇÃO DA API DE AVALIAÇÕES - PAÇOCAFLIX
+================================================================
+
+📋 RESUMO: Sistema de Avaliações de Filmes
+
+Este documento explica de forma simples como funciona o sistema de 
+avaliações do PAÇOCAFLIX, desde o frontend até o backend.
+
+================================================================
+🔧 BACKEND (Spring Boot) - API REST
+================================================================
+
+1. SALVAR AVALIAÇÃO
+-------------------
+Endpoint: POST /evaluation/save
+
+Código:
+@PostMapping("/save")
+public Mono<Evaluation> save(@RequestBody Evaluation evaluation) {
+    Evaluation savedEvaluation = this.evaluationService.save(evaluation);
+    return Mono.just(savedEvaluation);
+}
+
+O que faz:
+✅ Recebe uma avaliação (nota + comentário) do frontend
+✅ Salva no banco de dados H2
+✅ Retorna confirmação de que foi salvo
+
+Em português simples:
+"Quando alguém enviar uma avaliação, eu salvo no banco e confirmo"
+
+2. BUSCAR AVALIAÇÕES POR FILME
+-----------------------------
+Endpoint: GET /evaluation/findEvaluationsByMovie?idMovie={id}
+
+Código:
+@GetMapping("/findEvaluationsByMovie")
+public Mono<?> findEvaluationsByMovie(@RequestParam("idMovie") Long id) {
+    return Mono.just(evaluationService.findEvaluationsByMovie(id));
+}
+
+O que faz:
+✅ Busca todas as avaliações de um filme específico
+✅ Retorna lista com notas e comentários daquele filme
+
+Em português simples:
+"Me dê o ID do filme que eu mostro todas as avaliações dele"
+
+================================================================
+🌐 FRONTEND (Angular) - Interface do Usuário
+================================================================
+
+FUNÇÃO PARA ENVIAR AVALIAÇÃO
+-----------------------------
+
+Código:
+submitEvaluation(): void {
+    let evaluationData: Evaluation = {
+        authorName: this.authorName,
+        score: this.userRating,
+        comment: this.comment,
+        movie: this.movieData
+    }
+    
+    this.movieDbService.saveEvaluation(evaluationData).subscribe({
+        next: (response) => {
+            alert('Avaliação salva com sucesso!');
+            this.loadEvaluations(this.movie.id);
+        }
+    });
+}
+
+O que faz:
+✅ Pega dados que o usuário preencheu (nome, nota, comentário)
+✅ Organiza tudo em um objeto "evaluationData"
+✅ Envia para o backend via HTTP
+✅ Mostra mensagem "Avaliação salva com sucesso!"
+✅ Recarrega lista de avaliações para mostrar a nova
+
+================================================================
+🔄 FLUXO COMPLETO DO SISTEMA
+================================================================
+
+PASSO A PASSO:
+
+1. 👤 USUÁRIO
+   - Digita nome do autor
+   - Escolhe nota (1-5 estrelas)
+   - Escreve comentário sobre o filme
+
+2. 🌐 FRONTEND (Angular)
+   - Pega esses dados do formulário
+   - Monta objeto com todas as informações
+   - Envia via HTTP POST para o backend
+
+3. ⚙️ BACKEND (Spring Boot)
+   - Recebe os dados no endpoint /save
+   - Salva no banco de dados H2
+   - Retorna confirmação de sucesso
+
+4. ✅ RETORNO
+   - Frontend recebe confirmação
+   - Mostra mensagem de sucesso
+   - Atualiza lista de avaliações automaticamente
+
+5. 📋 RESULTADO
+   - Usuário vê sua avaliação na lista
+   - Outros usuários também podem ver
+   - Dados ficam salvos permanentemente
+
+================================================================
+🎯 EXEMPLO PRÁTICO
+================================================================
+
+Cenário: João quer avaliar o filme "Vingadores"
+
+1. João acessa detalhes do filme
+2. Preenche formulário:
+   - Nome: "João Silva"
+   - Nota: 5 estrelas
+   - Comentário: "Filme incrível, efeitos espetaculares!"
+
+3. Clica em "Enviar Avaliação"
+
+4. Sistema processa:
+   Frontend → Backend → Banco de Dados → Confirmação
+
+5. João vê:
+   - Mensagem: "Avaliação salva com sucesso!"
+   - Sua avaliação aparece na lista
+   - Nota contribui para média do filme
+
+================================================================
+📊 TECNOLOGIAS ENVOLVIDAS
+================================================================
+
+BACKEND:
+- Spring Boot (Framework Java)
+- Spring Web (API REST)
+- JPA/Hibernate (Banco de dados)
+- H2 Database (Banco em memória)
+- Maven (Gerenciamento de dependências)
+
+FRONTEND:
+- Angular 13 (Framework TypeScript)
+- TypeScript (Linguagem tipada)
+- RxJS (Programação reativa)
+- HTTP Client (Comunicação com API)
+
+COMUNICAÇÃO:
+- HTTP/REST (Protocolo de comunicação)
+- JSON (Formato de dados)
+- Observables (Gerenciamento de dados assíncronos)
+
+================================================================
+💡 CONCEITOS IMPORTANTES
+================================================================
+
+API REST:
+- Endpoint: URL específica para uma função
+- POST: Enviar dados (criar/salvar)
+- GET: Buscar dados (listar/consultar)
+- @RequestBody: Dados vindo no corpo da requisição
+- @RequestParam: Parâmetros na URL
+
+PROGRAMAÇÃO REATIVA:
+- Mono: Container para um único valor assíncrono
+- Observable: Stream de dados que pode ser observado
+- Subscribe: "Escutar" quando dados chegam
+
+ARQUITETURA:
+- Controller: Recebe requisições HTTP
+- Service: Contém lógica de negócio
+- Repository: Acessa banco de dados
+- Entity: Representa tabela do banco
+
+================================================================
+🎓 APRENDIZADOS DEMONSTRADOS
+================================================================
+
+1. Desenvolvimento Full-Stack
+2. Comunicação Frontend-Backend
+3. API REST com Spring Boot
+4. Interface reativa com Angular
+5. Persistência de dados
+6. Experiência do usuário (UX)
+7. Programação orientada a objetos
+8. Padrões arquiteturais (MVC)
+
+================================================================
+
+Este sistema de avaliações demonstra uma implementação completa
+de CRUD (Create, Read) com tecnologias modernas, seguindo boas
+práticas de desenvolvimento web.
+
+🎬 PAÇOCAFLIX - Sistema desenvolvido para trabalho acadêmico
+================================================================ 
