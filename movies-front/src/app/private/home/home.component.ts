@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation, HostListener } from '@angular/core';
 import { SwiperComponent } from "swiper/angular";
-
 import SwiperCore, { Pagination, Navigation, Autoplay } from "swiper";
 import { MovieDbService } from 'src/app/services/movie-db.service';
 import { AuthService } from 'src/app/services/auth.service';
